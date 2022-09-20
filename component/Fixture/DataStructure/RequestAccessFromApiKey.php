@@ -3,16 +3,9 @@ declare(strict_types=1);
 
 namespace Phant\Auth\Fixture\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\{
-	Application,
-	RequestAccessFromApiKey as EntityRequestAccessFromApiKey,
-	User,
-};
+use Phant\Auth\Domain\DataStructure\RequestAccessFromApiKey as EntityRequestAccessFromApiKey;
 use Phant\Auth\Domain\DataStructure\Value\{
-	AuthMethod,
 	IdRequestAccess,
-	Jwt,
-	Otp,
 	RequestAccessState,
 };
 

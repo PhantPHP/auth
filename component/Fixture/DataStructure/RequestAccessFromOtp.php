@@ -3,15 +3,9 @@ declare(strict_types=1);
 
 namespace Phant\Auth\Fixture\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\{
-	Application,
-	RequestAccessFromOtp as EntityRequestAccessFromOtp,
-	User,
-};
+use Phant\Auth\Domain\DataStructure\RequestAccessFromOtp as EntityRequestAccessFromOtp;
 use Phant\Auth\Domain\DataStructure\Value\{
-	AuthMethod,
 	IdRequestAccess,
-	Jwt,
 	Otp,
 	RequestAccessState,
 };
