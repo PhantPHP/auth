@@ -35,7 +35,7 @@ final class Application implements \Phant\Auth\Domain\Port\Application
 		if ($entity) return $entity;
 		
 		foreach (FixtureApplication::getCollection()->itemsIterator() as $entity) {
-			if ((string)$entity->id == (string)$id) continue;
+			if ((string)$entity->id != (string)$id) continue;
 			
 			return $entity;
 		}
@@ -46,7 +46,7 @@ final class Application implements \Phant\Auth\Domain\Port\Application
 	public function getFromApiKey(ApiKey $apiKey): EntityApplication
 	{
 		foreach (FixtureApplication::getCollection()->itemsIterator() as $entity) {
-			if ((string)$entity->apiKey == (string)$apiKey) continue;
+			if ((string)$entity->apiKey != (string)$apiKey) continue;
 			
 			return $entity;
 		}
