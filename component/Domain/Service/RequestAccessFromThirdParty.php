@@ -37,7 +37,6 @@ final class RequestAccessFromThirdParty
 	public function generate(Application $application): RequestAccessToken
 	{
 		$requestAccess = new EntityRequestAccessFromThirdParty(
-			IdRequestAccess::generate(),
 			$application,
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			null

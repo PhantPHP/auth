@@ -65,7 +65,6 @@ final class RequestAccessFromApiKey
 	private function generate(ApiKey $apiKey): EntityRequestAccessFromApiKey
 	{
 		return new EntityRequestAccessFromApiKey(
-			IdRequestAccess::generate(),
 			null,
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			$apiKey

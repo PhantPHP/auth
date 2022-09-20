@@ -30,7 +30,6 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 	public function testConstruct(): void
 	{
 		$entity = new RequestAccessFromOtp(
-			IdRequestAccess::generate(),
 			FixtureApplication::get(),
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			FixtureUser::get(),

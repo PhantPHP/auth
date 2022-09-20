@@ -16,7 +16,6 @@ use Phant\Auth\Domain\DataStructure\Value\{
 final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure\RequestAccess
 {
 	public function __construct(
-		IdRequestAccess $id,
 		Application $application,
 		RequestAccessState $state,
 		?User $user,
@@ -24,7 +23,7 @@ final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure
 	)
 	{
 		parent::__construct(
-			$id,
+			IdRequestAccess::generate(),
 			$application,
 			new AuthMethod(AuthMethod::THIRD_PARTY),
 			$state,

@@ -44,7 +44,6 @@ final class RequestAccessFromOtp
 		$otp = Otp::generate();
 		
 		$requestAccess = new EntityRequestAccessFromOtp(
-			IdRequestAccess::generate(),
 			$application,
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			$user,

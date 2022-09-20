@@ -32,6 +32,10 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	
 	public function testGet(): void
 	{
+		$this->service->set(
+			$this->fixture
+		);
+		
 		$entity = $this->service->get(
 			$this->fixture->getId()
 		);
@@ -42,6 +46,10 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	
 	public function testGetToken(): void
 	{
+		$this->service->set(
+			$this->fixture
+		);
+		
 		$value = $this->service->getToken(
 			$this->fixture
 		);
@@ -52,6 +60,10 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	
 	public function testGetFromToken(): void
 	{
+		$this->service->set(
+			$this->fixture
+		);
+		
 		$entity = $this->service->getFromToken(
 			$this->service->getToken(
 				$this->fixture

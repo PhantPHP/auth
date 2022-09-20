@@ -4,24 +4,18 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromApiKey as EntityRequestAccessFromApiKey;
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
-	RequestAccessState,
-};
+use Phant\Auth\Domain\DataStructure\Value\RequestAccessState;
 
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
-use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 
 final class RequestAccessFromApiKey
 {
-	public static function get(?IdRequestAccess $id = null, ?RequestAccessState $state = null, int $lifetime = null): EntityRequestAccessFromApiKey
+	public static function get(?RequestAccessState $state = null, int $lifetime = null): EntityRequestAccessFromApiKey
 	{
-		if (is_null($id)) $id = new IdRequestAccess('2362ecd5-ac3b-4806-817a-966eaaf308f0');
 		if (is_null($state)) $state = new RequestAccessState(RequestAccessState::REQUESTED);
 		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromApiKey::LIFETIME;
 		
 		return new EntityRequestAccessFromApiKey(
-			$id,
 			null,
 			$state,
 			FixtureApplication::get()->apiKey,
@@ -29,13 +23,15 @@ final class RequestAccessFromApiKey
 		);
 	}
 	
-	public static function getExpired(): EntityRequestAccessFromApiKey
+	public static function getExpired(?RequestAccessState $state = null): EntityRequestAccessFromApiKey
 	{
-		return self::get(null, null, -9999);
+		return self::get($state, -9999);
 	}
 	
 	public static function getVerified(): EntityRequestAccessFromApiKey
 	{
-		return (self::get())->setState(new RequestAccessState(RequestAccessState::VERIFIED));
+		return (self::get())
+			->setApplication(FixtureApplication::get())
+			->setState(new RequestAccessState(RequestAccessState::VERIFIED));
 	}
 }

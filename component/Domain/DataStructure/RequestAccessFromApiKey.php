@@ -18,7 +18,6 @@ final class RequestAccessFromApiKey extends \Phant\Auth\Domain\DataStructure\Req
 	protected ApiKey $apiKey;
 	
 	public function __construct(
-		IdRequestAccess $id,
 		?Application $application,
 		RequestAccessState $state,
 		ApiKey $apiKey,
@@ -26,7 +25,7 @@ final class RequestAccessFromApiKey extends \Phant\Auth\Domain\DataStructure\Req
 	)
 	{
 		parent::__construct(
-			$id,
+			IdRequestAccess::generate(),
 			$application,
 			new AuthMethod(AuthMethod::API_KEY),
 			$state,

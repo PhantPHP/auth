@@ -23,7 +23,6 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 	protected int $numberOfRemainingAttempts;
 	
 	public function __construct(
-		IdRequestAccess $id,
 		Application $application,
 		RequestAccessState $state,
 		User $user,
@@ -37,7 +36,7 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 		}
 		
 		parent::__construct(
-			$id,
+			IdRequestAccess::generate(),
 			$application,
 			new AuthMethod(AuthMethod::OTP),
 			$state,
