@@ -45,7 +45,7 @@ final class RequestAccessFromThirdParty
 		return $requestAccessToken;
 	}
 	
-	public function verify(RequestAccessToken $requestAccessToken, User $user, bool $isAuthorized): void
+	public function setStatus(RequestAccessToken $requestAccessToken, User $user, bool $isAuthorized): void
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		

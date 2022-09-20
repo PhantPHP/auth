@@ -42,9 +42,9 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(RequestAccessToken::class, $this->fixture);
 	}
 	
-	public function testVerify(): void
+	public function testSetStatus(): void
 	{
-		$this->service->verify(
+		$this->service->setStatus(
 			$this->fixture,
 			FixtureUser::get(),
 			true
@@ -53,9 +53,9 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 		$this->addToAssertionCount(1);
 	}
 	
-	public function testGetAccessToken(): void
+	public function testSetStatusToken(): void
 	{
-		$this->service->verify(
+		$this->service->setStatus(
 			$this->fixture,
 			FixtureUser::get(),
 			true
@@ -73,7 +73,7 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->expectException(NotAuthorized::class);
 		
-		$this->service->verify(
+		$this->service->setStatus(
 			$this->fixture,
 			FixtureUser::get(),
 			false
