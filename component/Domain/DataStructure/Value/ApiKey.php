@@ -12,6 +12,11 @@ final class ApiKey extends \Phant\DataStructure\Abstract\Value\Varchar
 		return new ApiKey(self::generateRandomString(8) . '.' . self::generateRandomString(64));
 	}
 	
+	public function check(string|self $apiKey): bool
+	{
+		return $this->value === (string)$apiKey;
+	}
+	
 	private static function generateRandomString($length = 10) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		

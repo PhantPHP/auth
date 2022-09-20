@@ -25,7 +25,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	const LIFETIME = 900; // 15 min
 	
 	protected IdRequestAccess $id;
-	protected Application $application;
+	protected ?Application $application;
 	protected AuthMethod $authMethod;
 	protected RequestAccessState $state;
 	protected ?User $user;
@@ -33,7 +33,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	
 	public function __construct(
 		IdRequestAccess $id,
-		Application $application,
+		?Application $application,
 		AuthMethod $authMethod,
 		RequestAccessState $state,
 		?User $user = null,
@@ -53,9 +53,14 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this->id;
 	}
 	
-	public function getApplication(): Application
+	public function getApplication(): ?Application
 	{
 		return $this->application;
+	}
+	
+	public function setApplication(Application $application): void
+	{
+		$this->application = $application;
 	}
 	
 	public function getAuthMethod(): AuthMethod

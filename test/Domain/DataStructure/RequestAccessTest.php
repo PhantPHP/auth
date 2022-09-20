@@ -17,6 +17,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 };
 
 use Phant\Auth\Fixture\DataStructure\{
+	Application as FixtureApplication,
 	RequestAccessFromOtp as FixtureRequestAccessFromOtp,
 	User as FixtureUser,
 };
@@ -49,6 +50,17 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsObject($value);
 		$this->assertInstanceOf(Application::class, $value);
+	}
+	
+	public function testSetApplication(): void
+	{
+		$this->fixture->setApplication(FixtureApplication::get());
+		
+		$value = $this->fixture->getApplication();
+		
+		$this->assertIsObject($value);
+		$this->assertInstanceOf(Application::class, $value);
+		$this->assertEquals(FixtureApplication::get(), $value);
 	}
 	
 	public function testGetAuthMethod(): void
