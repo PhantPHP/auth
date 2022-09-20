@@ -13,7 +13,7 @@ use Phant\Auth\Fixture\DataStructure\{
 };
 use Phant\Auth\Fixture\Service\AccessToken as FixtureServiceAccessToken;
 
-use Phant\Error\NotCompliant;
+use Phant\Error\NotAuthorized;
 
 final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 {
@@ -63,7 +63,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 	
 	public function testGetFromRequestAccessTokenInvalid(): void
 	{
-		$this->expectException(NotCompliant::class);
+		$this->expectException(NotAuthorized::class);
 		
 		$entity = $this->service->getFromRequestAccessToken(
 			FixtureRequestAccessFromOtp::get()

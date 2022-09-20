@@ -16,6 +16,8 @@ use Phant\Auth\Fixture\DataStructure\{
 	User as FixtureUser,
 };
 
+use Phant\Error\NotAuthorized;
+
 final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 {
 	protected RequestAccessFromOtp $fixture;
@@ -32,7 +34,8 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 			FixtureApplication::get(),
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			FixtureUser::get(),
-			Otp::generate()
+			Otp::generate(),
+			3
 		);
 		
 		$this->assertIsObject($entity);
@@ -47,5 +50,46 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsBool($result);
 		$this->assertEquals(true, $result);
+	}
+	
+	public function testGetNumberOfRemainingAttempts(): void
+	{
+		$result = $this->fixture->getNumberOfRemainingAttempts();
+		
+		$this->assertIsInt($result);
+		$this->assertEquals(3, $result);
+	}
+	
+	public function testCheckOtpNotAuthorized(): void
+	{
+		$this->expectException(NotAuthorized::class);
+		
+		$result = $this->fixture->checkOtp(
+			'000000'
+		);
+		$this->assertEquals(false, $result);
+		
+		$result = $this->fixture->getNumberOfRemainingAttempts();
+		$this->assertEquals(2, $result);
+		
+		$result = $this->fixture->checkOtp(
+			'000000'
+		);
+		$this->assertEquals(false, $result);
+		
+		$result = $this->fixture->getNumberOfRemainingAttempts();
+		$this->assertEquals(1, $result);
+		
+		$result = $this->fixture->checkOtp(
+			'000000'
+		);
+		$this->assertEquals(false, $result);
+		
+		$result = $this->fixture->getNumberOfRemainingAttempts();
+		$this->assertEquals(0, $result);
+		
+		$this->fixture->checkOtp(
+			'000000'
+		);
 	}
 }

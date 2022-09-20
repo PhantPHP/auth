@@ -23,6 +23,8 @@ use Phant\Auth\Fixture\Service\{
 };
 use Phant\Cache\SimpleCache;
 
+use Phant\Error\NotCompliant;
+
 final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 {
 	protected ServiceRequestAccessFromOtp $service;
@@ -45,9 +47,59 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(RequestAccessToken::class, $this->fixture);
 	}
 	
+	public function testGenerateInvalid(): void
+	{
+		$this->expectException(NotCompliant::class);
+		
+		$this->service->generate(
+			FixtureUser::get(),
+			FixtureApplication::get(),
+			0
+		);
+	}
+	
+	public function testVerify(): void
+	{
+		$otp = $this->cache->get((string)$this->fixture);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			$otp
+		);
+		
+		$this->assertIsBool($result);
+		$this->assertEquals(true, $result);
+	}
+	
+	public function testVerifyInvalid(): void
+	{
+		$result = $this->service->verify(
+			$this->fixture,
+			'000000'
+		);
+		
+		$this->assertIsBool($result);
+		$this->assertEquals(false, $result);
+	}
+	
+	public function testGetNumberOfRemainingAttempts(): void
+	{
+		$result = $this->service->getNumberOfRemainingAttempts(
+			$this->fixture
+		);
+		
+		$this->assertIsInt($result);
+		$this->assertEquals(3, $result);
+	}
+	
 	public function testGetAccessToken(): void
 	{
 		$otp = $this->cache->get((string)$this->fixture);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			$otp
+		);
 		
 		$entity = $this->service->getAccessToken(
 			$this->fixture,
@@ -56,15 +108,5 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
-	}
-	
-	public function testGetAccessTokenInvalid(): void
-	{
-		$entity = $this->service->getAccessToken(
-			$this->fixture,
-			'000000'
-		);
-		
-		$this->assertNull($entity);
 	}
 }

@@ -20,6 +20,7 @@ final class RequestAccessFromOtp
 		if (is_null($id)) $id = new IdRequestAccess('2362ecd5-ac3b-4806-817a-966eaaf308f0');
 		if (is_null($state)) $state = new RequestAccessState(RequestAccessState::REQUESTED);
 		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromOtp::LIFETIME;
+		$numberOfAttemptsLimit = 3;
 		
 		return new EntityRequestAccessFromOtp(
 			$id,
@@ -27,6 +28,7 @@ final class RequestAccessFromOtp
 			$state,
 			FixtureUser::get(),
 			new Otp('123456'),
+			$numberOfAttemptsLimit,
 			$lifetime
 		);
 	}

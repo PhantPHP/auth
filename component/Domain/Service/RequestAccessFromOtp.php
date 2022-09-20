@@ -39,7 +39,7 @@ final class RequestAccessFromOtp
 		$this->userNotification = $userNotification;
 	}
 	
-	public function generate(User $user, Application $application): RequestAccessToken
+	public function generate(User $user, Application $application, int $numberOfAttemptsLimit = 3): RequestAccessToken
 	{
 		$otp = Otp::generate();
 		
@@ -48,7 +48,8 @@ final class RequestAccessFromOtp
 			$application,
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			$user,
-			$otp
+			$otp,
+			$numberOfAttemptsLimit
 		);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
@@ -60,17 +61,36 @@ final class RequestAccessFromOtp
 		return $requestAccessToken;
 	}
 	
-	public function getAccessToken(RequestAccessToken $requestAccessToken, string|Otp $otp): ?AccessToken
+	public function verify(RequestAccessToken $requestAccessToken, string|Otp $otp): bool
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		if (is_string($otp)) $otp = new Otp($otp);
 		
-		if ( ! $requestAccess->checkOtp($otp)) return null;
+		if ( ! $requestAccess->checkOtp($otp)) {
+			
+			$requestAccess->setState(new RequestAccessState(RequestAccessState::REFUSED));
+			
+			return false;
+		}
 		
 		$requestAccess->setState(new RequestAccessState(RequestAccessState::VERIFIED));
 		
 		$this->serviceRequestAccess->set($requestAccess);
+		
+		return true;
+	}
+	
+	public function getNumberOfRemainingAttempts(RequestAccessToken $requestAccessToken): int
+	{
+		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
+		
+		return $requestAccess->getNumberOfRemainingAttempts($requestAccess);
+	}
+	
+	public function getAccessToken(RequestAccessToken $requestAccessToken): ?AccessToken
+	{
+		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
 		
