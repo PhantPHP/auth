@@ -17,7 +17,6 @@ use Phant\Auth\Domain\DataStructure\{
 };
 use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
-	AuthMethod,
 	IdRequestAccess,
 	RequestAccessState,
 	RequestAccessToken,

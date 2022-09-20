@@ -16,7 +16,6 @@ use Phant\Auth\Domain\DataStructure\{
 	User,
 };
 use Phant\Auth\Domain\DataStructure\Value\{
-	AuthMethod,
 	IdRequestAccess,
 	Otp,
 	RequestAccessState,
