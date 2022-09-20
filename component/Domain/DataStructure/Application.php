@@ -18,12 +18,16 @@ final class Application extends \Phant\DataStructure\Abstract\Entity
 	public ApiKey $apiKey;
 	
 	public function __construct(
-		IdApplication $id,
-		ApplicationName $name,
-		?Logo $logo,
-		ApiKey $apiKey
+		null|string|IdApplication $id,
+		null|string|ApplicationName $name,
+		null|string|Logo $logo,
+		string|ApiKey $apiKey
 	)
 	{
+		if (is_string($id)) $id = new IdApplication($id);
+		if (is_string($name)) $name = new ApplicationName($name);
+		if (is_string($logo)) $logo = new Logo($logo);
+		
 		$this->id = $id;
 		$this->name = $name;
 		$this->logo = $logo;
