@@ -44,7 +44,7 @@ final class RequestAccessFromOtp
 	{
 		$otp = Otp::generate();
 		
-		$requestAccessFromOtp = new EntityRequestAccessFromOtp(
+		$requestAccess = new EntityRequestAccessFromOtp(
 			IdRequestAccess::generate(),
 			$application,
 			new RequestAccessState(RequestAccessState::REQUESTED),
@@ -52,28 +52,28 @@ final class RequestAccessFromOtp
 			$otp
 		);
 		
-		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccessFromOtp);
+		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
-		$this->userNotification->sendOtpFromRequestAccess($requestAccessToken, $requestAccessFromOtp, $otp);
+		$this->userNotification->sendOtpFromRequestAccess($requestAccessToken, $requestAccess, $otp);
 		
-		$this->serviceRequestAccess->set($requestAccessFromOtp);
+		$this->serviceRequestAccess->set($requestAccess);
 		
 		return $requestAccessToken;
 	}
 	
 	public function getAccessToken(RequestAccessToken $requestAccessToken, string|Otp $otp): ?AccessToken
 	{
-		$requestAccessFromOtp = $this->serviceRequestAccess->getFromToken($requestAccessToken);
+		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		if (is_string($otp)) $otp = new Otp($otp);
 		
-		if ( ! $requestAccessFromOtp->checkOtp($otp)) return null;
+		if ( ! $requestAccess->checkOtp($otp)) return null;
 		
-		$requestAccessFromOtp->setState(new RequestAccessState(RequestAccessState::VERIFIED));
+		$requestAccess->setState(new RequestAccessState(RequestAccessState::VERIFIED));
 		
-		$this->serviceRequestAccess->set($requestAccessFromOtp);
+		$this->serviceRequestAccess->set($requestAccess);
 		
-		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccessFromOtp);
+		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
 		
 		return $accessToken;
 	}
