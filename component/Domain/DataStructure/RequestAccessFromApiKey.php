@@ -19,7 +19,7 @@ final class RequestAccessFromApiKey extends \Phant\Auth\Domain\DataStructure\Req
 	
 	public function __construct(
 		ApiKey $apiKey,
-		int $lifetime = self::LIFETIME
+		int $lifetime
 	)
 	{
 		parent::__construct(

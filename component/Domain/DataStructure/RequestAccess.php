@@ -23,7 +23,6 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 {
 	const TOKEN_PAYLOAD_EXPIRATION = 'expiration';
 	const TOKEN_PAYLOAD_ID = 'request_access_id';
-	const LIFETIME = 900; // 15 min
 	
 	protected IdRequestAccess $id;
 	protected ?Application $application;
@@ -38,7 +37,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		?User $user,
 		AuthMethod $authMethod,
 		RequestAccessState $state,
-		int $lifetime = self::LIFETIME
+		int $lifetime
 	)
 	{
 		$this->id = $id;

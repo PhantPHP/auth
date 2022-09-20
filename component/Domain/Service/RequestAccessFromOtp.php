@@ -24,6 +24,8 @@ use Phant\Auth\Domain\DataStructure\Value\{
 
 final class RequestAccessFromOtp
 {
+	const LIFETIME = 900; // 15 min
+	
 	protected ServiceRequestAccess $serviceRequestAccess;
 	protected ServiceAccessToken $serviceAccessToken;
 	protected UserNotification $userNotification;
@@ -39,9 +41,9 @@ final class RequestAccessFromOtp
 		$this->userNotification = $userNotification;
 	}
 	
-	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3): RequestAccessToken
+	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3, int $lifetime = self::LIFETIME): RequestAccessToken
 	{
-		$requestAccess = $this->build($application, $user, $numberOfAttemptsLimit);
+		$requestAccess = $this->build($application, $user, $numberOfAttemptsLimit, $lifetime);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
@@ -88,12 +90,13 @@ final class RequestAccessFromOtp
 		return $accessToken;
 	}
 	
-	private function build(Application $application, User $user, int $numberOfAttemptsLimit): EntityRequestAccessFromOtp
+	private function build(Application $application, User $user, int $numberOfAttemptsLimit, int $lifetime): EntityRequestAccessFromOtp
 	{
 		return new EntityRequestAccessFromOtp(
 			$application,
 			$user,
-			$numberOfAttemptsLimit
+			$numberOfAttemptsLimit,
+			$lifetime
 		);
 	}
 }

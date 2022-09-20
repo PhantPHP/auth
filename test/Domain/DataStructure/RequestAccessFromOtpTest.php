@@ -32,7 +32,8 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		$entity = new RequestAccessFromOtp(
 			FixtureApplication::get(),
 			FixtureUser::get(),
-			3
+			3,
+			900
 		);
 		
 		$this->assertIsObject($entity);

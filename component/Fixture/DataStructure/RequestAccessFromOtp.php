@@ -14,11 +14,9 @@ use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 
 final class RequestAccessFromOtp
 {
-	public static function get(?RequestAccessState $state = null, int $lifetime = null): EntityRequestAccessFromOtp
+	public static function get(?RequestAccessState $state = null, int $numberOfAttemptsLimit = 3, int $lifetime = 900): EntityRequestAccessFromOtp
 	{
 		if (is_null($state)) $state = new RequestAccessState(RequestAccessState::REQUESTED);
-		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromOtp::LIFETIME;
-		$numberOfAttemptsLimit = 3;
 		
 		return new EntityRequestAccessFromOtp(
 			FixtureApplication::get(),
@@ -28,9 +26,9 @@ final class RequestAccessFromOtp
 		);
 	}
 	
-	public static function getExpired(?RequestAccessState $state = null): EntityRequestAccessFromOtp
+	public static function getExpired(?RequestAccessState $state = null, int $numberOfAttemptsLimit = 3): EntityRequestAccessFromOtp
 	{
-		return self::get($state, -9999);
+		return self::get($state, $numberOfAttemptsLimit, -9999);
 	}
 	
 	public static function getVerified(): EntityRequestAccessFromOtp

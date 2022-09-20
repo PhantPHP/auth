@@ -22,6 +22,8 @@ use Phant\Auth\Domain\DataStructure\Value\{
 
 final class RequestAccessFromThirdParty
 {
+	const LIFETIME = 900; // 15 min
+	
 	protected ServiceRequestAccess $serviceRequestAccess;
 	protected ServiceAccessToken $serviceAccessToken;
 	
@@ -34,9 +36,9 @@ final class RequestAccessFromThirdParty
 		$this->serviceAccessToken = $serviceAccessToken;
 	}
 	
-	public function generate(Application $application): RequestAccessToken
+	public function generate(Application $application, int $lifetime = self::LIFETIME): RequestAccessToken
 	{
-		$requestAccess = $this->build($application);
+		$requestAccess = $this->build($application, $lifetime);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
@@ -64,10 +66,11 @@ final class RequestAccessFromThirdParty
 		return $accessToken;
 	}
 	
-	private function build(Application $application): EntityRequestAccessFromThirdParty
+	private function build(Application $application, int $lifetime): EntityRequestAccessFromThirdParty
 	{
 		return new EntityRequestAccessFromThirdParty(
-			$application
+			$application,
+			$lifetime
 		);
 	}
 }

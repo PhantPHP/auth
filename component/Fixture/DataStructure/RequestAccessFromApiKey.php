@@ -10,10 +10,9 @@ use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 
 final class RequestAccessFromApiKey
 {
-	public static function get(?RequestAccessState $state = null, int $lifetime = null): EntityRequestAccessFromApiKey
+	public static function get(?RequestAccessState $state = null, int $lifetime = 300): EntityRequestAccessFromApiKey
 	{
 		if (is_null($state)) $state = new RequestAccessState(RequestAccessState::REQUESTED);
-		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromApiKey::LIFETIME;
 		
 		return new EntityRequestAccessFromApiKey(
 			FixtureApplication::get()->apiKey,

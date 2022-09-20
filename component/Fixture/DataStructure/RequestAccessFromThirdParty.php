@@ -11,10 +11,9 @@ use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 
 final class RequestAccessFromThirdParty
 {
-	public static function get(?RequestAccessState $state = null, int $lifetime = null): EntityRequestAccessFromThirdParty
+	public static function get(?RequestAccessState $state = null, int $lifetime = 900): EntityRequestAccessFromThirdParty
 	{
 		if (is_null($state)) $state = new RequestAccessState(RequestAccessState::REQUESTED);
-		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromThirdParty::LIFETIME;
 		
 		return new EntityRequestAccessFromThirdParty(
 			FixtureApplication::get(),

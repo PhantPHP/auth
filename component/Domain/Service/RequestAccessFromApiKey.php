@@ -24,6 +24,8 @@ use Phant\Auth\Domain\DataStructure\Value\{
 
 final class RequestAccessFromApiKey
 {
+	const LIFETIME = 300; // 5 min
+	
 	protected ServiceRequestAccess $serviceRequestAccess;
 	protected ServiceAccessToken $serviceAccessToken;
 	protected PortApplication $repositoryApplication;
@@ -39,11 +41,11 @@ final class RequestAccessFromApiKey
 		$this->repositoryApplication = $repositoryApplication;
 	}
 	
-	public function getAccessToken(string|ApiKey $apiKey): ?AccessToken
+	public function getAccessToken(string|ApiKey $apiKey, int $lifetime = self::LIFETIME): ?AccessToken
 	{
 		if (is_string($apiKey)) $apiKey = new ApiKey($apiKey);
 		
-		$requestAccess = $this->build($apiKey);
+		$requestAccess = $this->build($apiKey, $lifetime);
 		
 		$application = $this->repositoryApplication->getFromApiKey($apiKey);
 		
@@ -62,10 +64,11 @@ final class RequestAccessFromApiKey
 		return $accessToken;
 	}
 	
-	private function build(ApiKey $apiKey): EntityRequestAccessFromApiKey
+	private function build(ApiKey $apiKey, int $lifetime): EntityRequestAccessFromApiKey
 	{
 		return new EntityRequestAccessFromApiKey(
-			$apiKey
+			$apiKey,
+			$lifetime
 		);
 	}
 }

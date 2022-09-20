@@ -26,7 +26,7 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 		Application $application,
 		User $user,
 		int $numberOfAttemptsLimit,
-		int $lifetime = self::LIFETIME
+		int $lifetime
 	)
 	{
 		if ($numberOfAttemptsLimit < 1) {

@@ -28,7 +28,8 @@ final class RequestAccessFromApiKeyTest extends \PHPUnit\Framework\TestCase
 	public function testConstruct(): void
 	{
 		$entity = new RequestAccessFromApiKey(
-			FixtureApplication::get()->apiKey
+			FixtureApplication::get()->apiKey,
+			300
 		);
 		
 		$this->assertIsObject($entity);

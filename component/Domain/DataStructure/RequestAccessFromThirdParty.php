@@ -17,7 +17,7 @@ final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure
 {
 	public function __construct(
 		Application $application,
-		int $lifetime = self::LIFETIME
+		int $lifetime
 	)
 	{
 		parent::__construct(
