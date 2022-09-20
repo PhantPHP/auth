@@ -21,7 +21,6 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 {
 	public const PAYLOAD_KEY_APP = 'app';
 	public const PAYLOAD_KEY_USER = 'user';
-	public const ALGORITHM = Jwt::ALGORITHM;
 	public const LIFETIME = 10800;
 	
 	protected string $value;

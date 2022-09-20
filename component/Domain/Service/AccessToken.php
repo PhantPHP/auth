@@ -36,11 +36,6 @@ final class AccessToken
 		return $this->sslKey->getPublic();
 	}
 	
-	public function getAlgorithm(): string
-	{
-		return EntityAccessToken::ALGORITHM;
-	}
-	
 	public function check(string $accessToken, Application $application): bool
 	{
 		return (new EntityAccessToken($accessToken))->check(

@@ -33,13 +33,6 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$this->assertIsString($value);
 	}
 	
-	public function testGetAlgorithm(): void
-	{
-		$value = $this->service->getAlgorithm();
-		
-		$this->assertIsString($value);
-	}
-	
 	public function testCheck(): void
 	{
 		$value = $this->service->check(
