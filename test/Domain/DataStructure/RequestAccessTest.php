@@ -63,6 +63,14 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(FixtureApplication::get(), $value);
 	}
 	
+	public function testSetApplicationInvalid(): void
+	{
+		$this->expectException(NotAuthorized::class);
+		
+		$this->fixture->setApplication(FixtureApplication::get());
+		$this->fixture->setApplication(FixtureApplication::get());
+	}
+	
 	public function testGetUser(): void
 	{
 		$value = $this->fixture->getUser();
@@ -79,6 +87,14 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->assertIsObject($value);
 		$this->assertInstanceOf(User::class, $value);
 		$this->assertEquals(FixtureUser::get(), $value);
+	}
+	
+	public function testSetUserInvalid(): void
+	{
+		$this->expectException(NotAuthorized::class);
+		
+		$this->fixture->setUser(FixtureUser::get());
+		$this->fixture->setUser(FixtureUser::get());
 	}
 	
 	public function testGetAuthMethod(): void
