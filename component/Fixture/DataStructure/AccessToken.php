@@ -18,7 +18,8 @@ final class AccessToken
 		return EntityAccessToken::generate(
 			FixtureSslKey::get(),
 			FixtureApplication::get(),
-			FixtureUser::get()
+			FixtureUser::get(),
+			86400
 		);
 	}
 	

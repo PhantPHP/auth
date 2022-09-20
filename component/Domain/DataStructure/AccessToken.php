@@ -21,12 +21,11 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 {
 	public const PAYLOAD_KEY_APP = 'app';
 	public const PAYLOAD_KEY_USER = 'user';
-	public const LIFETIME = 10800;
 	
 	protected string $value;
 	protected int $lifetime;
 	
-	public function __construct(string $value, int $lifetime = self::LIFETIME)
+	public function __construct(string $value, int $lifetime)
 	{
 		$this->value = $value;
 		$this->lifetime = $lifetime;
@@ -74,7 +73,7 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 		}
 	}
 	
-	public static function generate(SslKey $sslKey, Application $application, ?User $user = null, int $lifetime = self::LIFETIME): self
+	public static function generate(SslKey $sslKey, Application $application, ?User $user, int $lifetime): self
 	{
 		$payload = [
 			self::PAYLOAD_KEY_APP => SerializeApplication::serialize($application),
@@ -84,6 +83,6 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 			$payload[ self::PAYLOAD_KEY_USER ] = SerializeUser::serialize($user);
 		}
 		
-		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime));
+		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime), $lifetime);
 	}
 }

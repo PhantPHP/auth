@@ -23,7 +23,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 	
 	public function testConstruct(): void
 	{
-		$entity = new AccessToken($this->fixture->getValue());
+		$entity = new AccessToken($this->fixture->getValue(), 86400);
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
@@ -76,7 +76,8 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$entity = AccessToken::generate(
 			FixtureSslKey::get(),
 			FixtureApplication::get(),
-			FixtureUser::get()
+			FixtureUser::get(),
+			86400
 		);
 		
 		$this->assertIsObject($entity);

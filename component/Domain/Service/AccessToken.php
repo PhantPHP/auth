@@ -19,6 +19,8 @@ use Phant\Error\NotAuthorized;
 
 final class AccessToken
 {
+	public const LIFETIME = 86400; // 24h
+	
 	protected SslKey $sslKey;
 	protected ServiceRequestAccess $serviceRequestAccess;
 	
@@ -36,15 +38,15 @@ final class AccessToken
 		return $this->sslKey->getPublic();
 	}
 	
-	public function check(string $accessToken, Application $application): bool
+	public function check(string $accessToken, Application $application, int $lifetime = self::LIFETIME): bool
 	{
-		return (new EntityAccessToken($accessToken))->check(
+		return (new EntityAccessToken($accessToken, $lifetime))->check(
 			$this->sslKey, 
 			$application
 		);
 	}
 	
-	public function getFromRequestAccessToken(RequestAccess $requestAccess): EntityAccessToken
+	public function getFromRequestAccessToken(RequestAccess $requestAccess, int $lifetime = self::LIFETIME): EntityAccessToken
 	{
 		// Check request access status
 		if (!$requestAccess->canBeSetStateTo(new RequestAccessState(RequestAccessState::GRANTED))) {
@@ -55,7 +57,8 @@ final class AccessToken
 		$accessToken = EntityAccessToken::generate(
 			$this->sslKey,
 			$requestAccess->getApplication(),
-			$requestAccess->getUser()
+			$requestAccess->getUser(),
+			$lifetime
 		);
 		
 		// Change state
@@ -67,9 +70,9 @@ final class AccessToken
 		return $accessToken;
 	}
 	
-	public function getUserInfos(string $accessToken): ?array
+	public function getUserInfos(string $accessToken, int $lifetime = self::LIFETIME): ?array
 	{
-		$payLoad = (new EntityAccessToken($accessToken))->getPayload($this->sslKey);
+		$payLoad = (new EntityAccessToken($accessToken, $lifetime))->getPayload($this->sslKey);
 		
 		if (!isset($payLoad[ EntityAccessToken::PAYLOAD_KEY_USER ])) return null;
 		
