@@ -21,7 +21,7 @@ use Phant\Auth\Fixture\Service\{
 	RequestAccessFromThirdParty as FixtureServiceRequestAccessFromThirdParty,
 };
 
-use Phant\Error\NotCompliant;
+use Phant\Error\NotAuthorized;
 
 final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 {
@@ -71,7 +71,7 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	
 	public function testGetAccessTokenInvalid(): void
 	{
-		$this->expectException(NotCompliant::class);
+		$this->expectException(NotAuthorized::class);
 		
 		$this->service->verify(
 			$this->fixture,

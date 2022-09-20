@@ -15,7 +15,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 };
 use Phant\Auth\Domain\DataStructure\Application;
 
-use Phant\Error\NotCompliant;
+use Phant\Error\NotAuthorized;
 
 final class AccessToken
 {
@@ -53,7 +53,7 @@ final class AccessToken
 	{
 		// Check request access status
 		if (!$requestAccess->canBeSetStateTo(new RequestAccessState(RequestAccessState::GRANTED))) {
-			throw new NotCompliant('The access request is invalid');
+			throw new NotAuthorized('The access request is invalid');
 		}
 		
 		// Generate new access token
