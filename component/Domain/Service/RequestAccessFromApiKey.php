@@ -67,6 +67,7 @@ final class RequestAccessFromApiKey
 	{
 		return new EntityRequestAccessFromApiKey(
 			IdRequestAccess::generate(),
+			null,
 			new RequestAccessState(RequestAccessState::REQUESTED),
 			$apiKey
 		);

@@ -29,6 +29,7 @@ final class RequestAccessFromApiKey
 		
 		return new EntityRequestAccessFromApiKey(
 			$id,
+			null,
 			$state,
 			FixtureApplication::get()->apiKey,
 			$lifetime
