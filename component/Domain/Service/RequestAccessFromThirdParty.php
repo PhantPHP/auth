@@ -36,11 +36,7 @@ final class RequestAccessFromThirdParty
 	
 	public function generate(Application $application): RequestAccessToken
 	{
-		$requestAccess = new EntityRequestAccessFromThirdParty(
-			$application,
-			new RequestAccessState(RequestAccessState::REQUESTED),
-			null
-		);
+		$requestAccess = $this->build($application);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
@@ -66,5 +62,12 @@ final class RequestAccessFromThirdParty
 		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
 		
 		return $accessToken;
+	}
+	
+	private function build(Application $application): EntityRequestAccessFromThirdParty
+	{
+		return new EntityRequestAccessFromThirdParty(
+			$application
+		);
 	}
 }

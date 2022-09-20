@@ -43,7 +43,7 @@ final class RequestAccessFromApiKey
 	{
 		if (is_string($apiKey)) $apiKey = new ApiKey($apiKey);
 		
-		$requestAccess = $this->generate($apiKey);
+		$requestAccess = $this->build($apiKey);
 		
 		$application = $this->repositoryApplication->getFromApiKey($apiKey);
 		
@@ -62,11 +62,9 @@ final class RequestAccessFromApiKey
 		return $accessToken;
 	}
 	
-	private function generate(ApiKey $apiKey): EntityRequestAccessFromApiKey
+	private function build(ApiKey $apiKey): EntityRequestAccessFromApiKey
 	{
 		return new EntityRequestAccessFromApiKey(
-			null,
-			new RequestAccessState(RequestAccessState::REQUESTED),
 			$apiKey
 		);
 	}

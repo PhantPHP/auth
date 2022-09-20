@@ -26,9 +26,7 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	public function testConstruct(): void
 	{
 		$entity = new RequestAccessFromThirdParty(
-			FixtureApplication::get(),
-			new RequestAccessState(RequestAccessState::REQUESTED),
-			null
+			FixtureApplication::get()
 		);
 		
 		$this->assertIsObject($entity);

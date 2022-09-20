@@ -35,8 +35,8 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->service = (new FixtureServiceRequestAccessFromOtp())();
 		$this->fixture = $this->service->generate(
-			FixtureUser::get(),
-			FixtureApplication::get()
+			FixtureApplication::get(),
+			FixtureUser::get()
 		);
 		$this->cache = new SimpleCache(realpath(__DIR__ . '/../../../test/storage/'), 'user-notification');
 	}
@@ -52,8 +52,8 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		$this->expectException(NotCompliant::class);
 		
 		$this->service->generate(
-			FixtureUser::get(),
 			FixtureApplication::get(),
+			FixtureUser::get(),
 			0
 		);
 	}

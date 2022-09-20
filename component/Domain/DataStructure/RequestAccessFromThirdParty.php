@@ -17,17 +17,15 @@ final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure
 {
 	public function __construct(
 		Application $application,
-		RequestAccessState $state,
-		?User $user,
 		int $lifetime = self::LIFETIME
 	)
 	{
 		parent::__construct(
 			IdRequestAccess::generate(),
 			$application,
+			null,
 			new AuthMethod(AuthMethod::THIRD_PARTY),
-			$state,
-			$user,
+			new RequestAccessState(RequestAccessState::REQUESTED),
 			$lifetime
 		);
 	}

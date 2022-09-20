@@ -5,7 +5,7 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\{
 	Application,
-	RequestAccessFromOtp,
+	RequestAccessFromApiKey,
 	User,
 };
 use Phant\Auth\Domain\DataStructure\Value\{
@@ -18,22 +18,23 @@ use Phant\Auth\Domain\DataStructure\Value\{
 
 use Phant\Auth\Fixture\DataStructure\{
 	Application as FixtureApplication,
-	RequestAccessFromOtp as FixtureRequestAccessFromOtp,
+	RequestAccessFromApiKey as FixtureRequestAccessFromApiKey,
 	User as FixtureUser,
 };
 use Phant\Auth\Fixture\DataStructure\Value\{
 	SslKey as FixtureSslKey,
 };
 
+use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 
 final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 {
-	protected RequestAccessFromOtp $fixture;
+	protected RequestAccessFromApiKey $fixture;
 	
 	public function setUp(): void
 	{
-		$this->fixture = FixtureRequestAccessFromOtp::get();
+		$this->fixture = FixtureRequestAccessFromApiKey::get();
 	}
 	
 	public function testGetId(): void
@@ -48,8 +49,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	{
 		$value = $this->fixture->getApplication();
 		
-		$this->assertIsObject($value);
-		$this->assertInstanceOf(Application::class, $value);
+		$this->assertNull($value);
 	}
 	
 	public function testSetApplication(): void
@@ -61,6 +61,24 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->assertIsObject($value);
 		$this->assertInstanceOf(Application::class, $value);
 		$this->assertEquals(FixtureApplication::get(), $value);
+	}
+	
+	public function testGetUser(): void
+	{
+		$value = $this->fixture->getUser();
+		
+		$this->assertNull($value);
+	}
+	
+	public function testSetUser(): void
+	{
+		$this->fixture->setUser(FixtureUser::get());
+		
+		$value = $this->fixture->getUser();
+		
+		$this->assertIsObject($value);
+		$this->assertInstanceOf(User::class, $value);
+		$this->assertEquals(FixtureUser::get(), $value);
 	}
 	
 	public function testGetAuthMethod(): void
@@ -79,25 +97,6 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(RequestAccessState::class, $value);
 	}
 	
-	public function testGetUser(): void
-	{
-		$value = $this->fixture->getUser();
-		
-		$this->assertIsObject($value);
-		$this->assertInstanceOf(User::class, $value);
-	}
-	
-	public function testSetUser(): void
-	{
-		$this->fixture->setUser(FixtureUser::get());
-		
-		$value = $this->fixture->getUser();
-		
-		$this->assertIsObject($value);
-		$this->assertInstanceOf(User::class, $value);
-		$this->assertEquals(FixtureUser::get(), $value);
-	}
-	
 	public function testCanBeSetStateTo(): void
 	{
 		$result = $this->fixture->canBeSetStateTo(new RequestAccessState(RequestAccessState::VERIFIED));
@@ -111,7 +110,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$entity = $this->fixture->setState(new RequestAccessState(RequestAccessState::VERIFIED));
 		
 		$this->assertIsObject($entity);
-		$this->assertInstanceOf(RequestAccessFromOtp::class, $entity);
+		$this->assertInstanceOf(RequestAccessFromApiKey::class, $entity);
 		
 		$this->assertIsObject($entity->getState());
 		$this->assertInstanceOf(RequestAccessState::class, $entity->getState());
@@ -120,7 +119,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	
 	public function testSetStateInvalid(): void
 	{
-		$this->expectException(NotCompliant::class);
+		$this->expectException(NotAuthorized::class);
 		
 		$entity = $this->fixture->setState(new RequestAccessState(RequestAccessState::REQUESTED));
 	}
@@ -160,7 +159,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->expectException(NotCompliant::class);
 		
 		$this->fixture->untokenizeId(
-			FixtureRequestAccessFromOtp::getExpired()->tokenizeId(FixtureSslKey::get()),
+			FixtureRequestAccessFromApiKey::getExpired()->tokenizeId(FixtureSslKey::get()),
 			FixtureSslKey::get()
 		);
 	}

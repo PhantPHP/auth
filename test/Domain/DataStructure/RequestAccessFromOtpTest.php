@@ -31,9 +31,7 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 	{
 		$entity = new RequestAccessFromOtp(
 			FixtureApplication::get(),
-			new RequestAccessState(RequestAccessState::REQUESTED),
 			FixtureUser::get(),
-			Otp::generate(),
 			3
 		);
 		
@@ -41,10 +39,18 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(RequestAccessFromOtp::class, $entity);
 	}
 	
+	public function testGetOtp(): void
+	{
+		$value = $this->fixture->getOtp();
+		
+		$this->assertIsObject($value);
+		$this->assertInstanceOf(Otp::class, $value);
+	}
+	
 	public function testCheckOtp(): void
 	{
 		$result = $this->fixture->checkOtp(
-			'123456'
+			$this->fixture->getOtp()
 		);
 		
 		$this->assertIsBool($result);

@@ -16,8 +16,6 @@ final class RequestAccessFromApiKey
 		if (is_null($lifetime)) $lifetime = EntityRequestAccessFromApiKey::LIFETIME;
 		
 		return new EntityRequestAccessFromApiKey(
-			null,
-			$state,
 			FixtureApplication::get()->apiKey,
 			$lifetime
 		);

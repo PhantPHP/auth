@@ -39,21 +39,13 @@ final class RequestAccessFromOtp
 		$this->userNotification = $userNotification;
 	}
 	
-	public function generate(User $user, Application $application, int $numberOfAttemptsLimit = 3): RequestAccessToken
+	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3): RequestAccessToken
 	{
-		$otp = Otp::generate();
-		
-		$requestAccess = new EntityRequestAccessFromOtp(
-			$application,
-			new RequestAccessState(RequestAccessState::REQUESTED),
-			$user,
-			$otp,
-			$numberOfAttemptsLimit
-		);
+		$requestAccess = $this->build($application, $user, $numberOfAttemptsLimit);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
-		$this->userNotification->sendOtpFromRequestAccess($requestAccessToken, $requestAccess, $otp);
+		$this->userNotification->sendOtpFromRequestAccess($requestAccessToken, $requestAccess, $requestAccess->getOtp());
 		
 		$this->serviceRequestAccess->set($requestAccess);
 		
@@ -94,5 +86,14 @@ final class RequestAccessFromOtp
 		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
 		
 		return $accessToken;
+	}
+	
+	private function build(Application $application, User $user, int $numberOfAttemptsLimit): EntityRequestAccessFromOtp
+	{
+		return new EntityRequestAccessFromOtp(
+			$application,
+			$user,
+			$numberOfAttemptsLimit
+		);
 	}
 }

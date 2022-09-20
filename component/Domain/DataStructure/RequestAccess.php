@@ -16,6 +16,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	SslKey,
 };
 
+use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 
 abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
@@ -26,25 +27,25 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	
 	protected IdRequestAccess $id;
 	protected ?Application $application;
+	protected ?User $user;
 	protected AuthMethod $authMethod;
 	protected RequestAccessState $state;
-	protected ?User $user;
 	protected int $expiration;
 	
 	public function __construct(
 		IdRequestAccess $id,
 		?Application $application,
+		?User $user,
 		AuthMethod $authMethod,
 		RequestAccessState $state,
-		?User $user = null,
 		int $lifetime = self::LIFETIME
 	)
 	{
 		$this->id = $id;
 		$this->application = $application;
+		$this->user = $user;
 		$this->authMethod = $authMethod;
 		$this->state = $state;
-		$this->user = $user;
 		$this->expiration = time() + $lifetime;
 	}
 	
@@ -53,24 +54,27 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this->id;
 	}
 	
+	public function setApplication(Application $application): void
+	{
+		if ($this->application) {
+			throw new NotAuthorized('It is not allowed to modify the application');
+		}
+		
+		$this->application = $application;
+	}
+	
 	public function getApplication(): ?Application
 	{
 		return $this->application;
 	}
 	
-	public function setApplication(Application $application): void
+	public function setUser(User $user): void
 	{
-		$this->application = $application;
-	}
-	
-	public function getAuthMethod(): AuthMethod
-	{
-		return $this->authMethod;
-	}
-	
-	public function getState(): RequestAccessState
-	{
-		return $this->state;
+		if ($this->user) {
+			throw new NotAuthorized('It is not allowed to modify the user');
+		}
+		
+		$this->user = $user;
 	}
 	
 	public function getUser(): ?User
@@ -78,9 +82,9 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this->user;
 	}
 	
-	public function setUser(User $user): void
+	public function getAuthMethod(): AuthMethod
 	{
-		$this->user = $user;
+		return $this->authMethod;
 	}
 	
 	public function canBeSetStateTo(RequestAccessState $state): bool
@@ -91,12 +95,17 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	public function setState(RequestAccessState $state): self
 	{
 		if (!$this->state->canBeSetTo($state)) {
-			throw new NotCompliant('State can be set to set to : ' . $state);
+			throw new NotAuthorized('State can be set to set to : ' . $state);
 		}
 		
 		$this->state = $state;
 		
 		return $this;
+	}
+	
+	public function getState(): RequestAccessState
+	{
+		return $this->state;
 	}
 	
 	public function tokenizeId(SslKey $sslKey): RequestAccessToken

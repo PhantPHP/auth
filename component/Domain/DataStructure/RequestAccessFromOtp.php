@@ -24,9 +24,7 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 	
 	public function __construct(
 		Application $application,
-		RequestAccessState $state,
 		User $user,
-		Otp $otp,
 		int $numberOfAttemptsLimit,
 		int $lifetime = self::LIFETIME
 	)
@@ -38,14 +36,19 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 		parent::__construct(
 			IdRequestAccess::generate(),
 			$application,
-			new AuthMethod(AuthMethod::OTP),
-			$state,
 			$user,
+			new AuthMethod(AuthMethod::OTP),
+			new RequestAccessState(RequestAccessState::REQUESTED),
 			$lifetime
 		);
 		
-		$this->otp = $otp;
+		$this->otp = Otp::generate();
 		$this->numberOfRemainingAttempts = $numberOfAttemptsLimit;
+	}
+	
+	public function getOtp(): Otp
+	{
+		return $this->otp;
 	}
 	
 	public function getNumberOfRemainingAttempts(): int

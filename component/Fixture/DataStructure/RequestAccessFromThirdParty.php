@@ -18,8 +18,6 @@ final class RequestAccessFromThirdParty
 		
 		return new EntityRequestAccessFromThirdParty(
 			FixtureApplication::get(),
-			$state,
-			null,
 			$lifetime
 		);
 	}

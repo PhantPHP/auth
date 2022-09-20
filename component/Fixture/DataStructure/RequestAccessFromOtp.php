@@ -22,9 +22,7 @@ final class RequestAccessFromOtp
 		
 		return new EntityRequestAccessFromOtp(
 			FixtureApplication::get(),
-			$state,
 			FixtureUser::get(),
-			new Otp('123456'),
 			$numberOfAttemptsLimit,
 			$lifetime
 		);
