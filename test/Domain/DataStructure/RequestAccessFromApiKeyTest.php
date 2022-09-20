@@ -5,7 +5,6 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromApiKey;
 use Phant\Auth\Domain\DataStructure\Value\{
-	AuthMethod,
 	IdRequestAccess,
 	Otp,
 	RequestAccessState,

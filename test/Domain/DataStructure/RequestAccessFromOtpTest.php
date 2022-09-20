@@ -5,7 +5,6 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromOtp;
 use Phant\Auth\Domain\DataStructure\Value\{
-	AuthMethod,
 	IdRequestAccess,
 	Otp,
 	RequestAccessState,
