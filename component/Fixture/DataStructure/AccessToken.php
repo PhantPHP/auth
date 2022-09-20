@@ -9,9 +9,7 @@ use Phant\Auth\Fixture\DataStructure\{
 	Application as FixtureApplication,
 	User as FixtureUser,
 };
-use Phant\Auth\Fixture\DataStructure\Value\{
-	SslKey as FixtureSslKey,
-};
+use Phant\Auth\Fixture\DataStructure\Value\SslKey as FixtureSslKey;
 
 final class AccessToken
 {

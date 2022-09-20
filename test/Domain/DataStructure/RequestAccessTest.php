@@ -43,7 +43,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(IdRequestAccess::class, $value);
 	}
 	
-	public function testApplication(): void
+	public function testGetApplication(): void
 	{
 		$value = $this->fixture->getApplication();
 		

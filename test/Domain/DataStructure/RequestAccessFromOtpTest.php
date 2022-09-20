@@ -42,7 +42,9 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 	
 	public function testCheckOtp(): void
 	{
-		$result = $this->fixture->checkOtp('123456');
+		$result = $this->fixture->checkOtp(
+			'123456'
+		);
 		
 		$this->assertIsBool($result);
 		$this->assertEquals(true, $result);

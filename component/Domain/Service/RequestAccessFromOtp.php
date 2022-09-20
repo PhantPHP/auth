@@ -8,9 +8,7 @@ use Phant\Auth\Domain\Service\{
 	RequestAccess as ServiceRequestAccess,
 };
 
-use Phant\Auth\Domain\Port\{
-	UserNotification,
-};
+use Phant\Auth\Domain\Port\UserNotification;
 use Phant\Auth\Domain\DataStructure\{
 	AccessToken,
 	Application,
