@@ -21,6 +21,8 @@ use Phant\Auth\Fixture\Service\{
 	RequestAccessFromThirdParty as FixtureServiceRequestAccessFromThirdParty,
 };
 
+use Phant\Error\NotCompliant;
+
 final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 {
 	protected ServiceRequestAccessFromThirdParty $service;
@@ -44,7 +46,8 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->service->verify(
 			$this->fixture,
-			FixtureUser::get()
+			FixtureUser::get(),
+			true
 		);
 		
 		$this->addToAssertionCount(1);
@@ -54,7 +57,8 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->service->verify(
 			$this->fixture,
-			FixtureUser::get()
+			FixtureUser::get(),
+			true
 		);
 		
 		$entity = $this->service->getAccessToken(
@@ -63,5 +67,20 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
+	}
+	
+	public function testGetAccessTokenInvalid(): void
+	{
+		$this->expectException(NotCompliant::class);
+		
+		$this->service->verify(
+			$this->fixture,
+			FixtureUser::get(),
+			false
+		);
+		
+		$entity = $this->service->getAccessToken(
+			$this->fixture
+		);
 	}
 }
