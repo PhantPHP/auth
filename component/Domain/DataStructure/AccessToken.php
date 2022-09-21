@@ -8,6 +8,7 @@ use Phant\Auth\Domain\DataStructure\{
 	User,
 };
 use Phant\Auth\Domain\DataStructure\Value\{
+	Expire,
 	IdApplication,
 	Jwt,
 	SslKey,
@@ -23,17 +24,22 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 	public const PAYLOAD_KEY_USER = 'user';
 	
 	protected string $value;
-	protected int $lifetime;
+	protected Expire $expire;
 	
 	public function __construct(string $value, int $lifetime)
 	{
 		$this->value = $value;
-		$this->lifetime = $lifetime;
+		$this->expire = new Expire(date('Y-m-d', time() + $lifetime));
 	}
 	
 	public function getValue(): string
 	{
 		return $this->value;
+	}
+	
+	public function getExpire(): Expire
+	{
+		return $this->expire;
 	}
 	
 	public function __toString(): string

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\AccessToken;
+use Phant\Auth\Domain\DataStructure\Value\Expire;
 
 use Phant\Auth\Fixture\DataStructure\{
 	AccessToken as FixtureAccessToken,
@@ -27,6 +28,14 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
+	}
+	
+	public function testGetExpire(): void
+	{
+		$value = $this->fixture->getExpire();
+		
+		$this->assertIsObject($value);
+		$this->assertInstanceOf(Expire::class, $value);
 	}
 	
 	public function testCheck(): void
