@@ -25,18 +25,10 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 	
 	public function testConstruct(): void
 	{
-		$entity = new AccessToken($this->fixture->getValue(), 86400);
+		$entity = new AccessToken((string)$this->fixture);
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
-	}
-	
-	public function testGetExpire(): void
-	{
-		$value = $this->fixture->getExpire();
-		
-		$this->assertIsObject($value);
-		$this->assertInstanceOf(Expire::class, $value);
 	}
 	
 	public function testCheck(): void
@@ -68,6 +60,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		);
 		
 		$this->assertIsArray($result);
+		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_EXPIRE, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_AUTH_METHOD, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_APP, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_USER, $result);

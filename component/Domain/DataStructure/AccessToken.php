@@ -21,32 +21,21 @@ use Phant\Auth\Domain\Serialize\{
 
 final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 {
+	public const PAYLOAD_KEY_EXPIRE = 'expire';
 	public const PAYLOAD_KEY_AUTH_METHOD = 'auth_method';
 	public const PAYLOAD_KEY_APP = 'app';
 	public const PAYLOAD_KEY_USER = 'user';
 	
 	protected string $value;
-	protected Expire $expire;
 	
-	public function __construct(string $value, int $lifetime)
+	public function __construct(string $value)
 	{
 		$this->value = $value;
-		$this->expire = new Expire(date('Y-m-d', time() + $lifetime));
-	}
-	
-	public function getValue(): string
-	{
-		return $this->value;
-	}
-	
-	public function getExpire(): Expire
-	{
-		return $this->expire;
 	}
 	
 	public function __toString(): string
 	{
-		return $this->getValue();
+		return $this->value;
 	}
 	
 	public function check(SslKey $sslKey, Application $application): bool
@@ -89,7 +78,10 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 		int $lifetime
 	): self
 	{
+		$expire = (new Expire(time() + $lifetime))->getUtc();
+		
 		$payload = [
+			self::PAYLOAD_KEY_EXPIRE => (string) $expire,
 			self::PAYLOAD_KEY_AUTH_METHOD => (string) $authMethod,
 			self::PAYLOAD_KEY_APP => SerializeApplication::serialize($application),
 		];
@@ -98,6 +90,6 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 			$payload[ self::PAYLOAD_KEY_USER ] = SerializeUser::serialize($user);
 		}
 		
-		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime), $lifetime);
+		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime));
 	}
 }

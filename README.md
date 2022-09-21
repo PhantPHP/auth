@@ -323,9 +323,9 @@ $isValid = $serviceAccessToken->check($accessToken, $application);
 ```
 
 
-### Get user infos
+### Get payload
 
-The app can get the token user data from the service.
+The app can get the token payload from the service.
 
 ```php
 use Phant\Auth\Domain\DataStructure\Application;
@@ -336,5 +336,5 @@ $application = new Application(
 	'https://domain.ext/image.ext'
 );
 
-$userInfos = $serviceAccessToken->getUserInfos($accessToken);
+$payload = $serviceAccessToken->getPayload($accessToken);
 ```
