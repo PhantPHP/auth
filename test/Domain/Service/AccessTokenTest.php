@@ -44,6 +44,15 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $value);
 	}
 	
+	public function testGetPayload(): void
+	{
+		$value = $this->service->getPayload(
+			(string)$this->fixture
+		);
+		
+		$this->assertIsArray($value);
+	}
+	
 	public function testGetFromToken(): void
 	{
 		$entity = $this->service->getFromToken(
@@ -61,14 +70,5 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$entity = $this->service->getFromToken(
 			FixtureRequestAccessFromOtp::get()
 		);
-	}
-	
-	public function testGetUserInfos(): void
-	{
-		$value = $this->service->getUserInfos(
-			(string)$this->fixture
-		);
-		
-		$this->assertIsArray($value);
 	}
 }

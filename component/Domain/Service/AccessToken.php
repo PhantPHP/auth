@@ -44,6 +44,11 @@ final class AccessToken
 		);
 	}
 	
+	public function getPayload(string $accessToken, int $lifetime = self::LIFETIME): ?array
+	{
+		return (new EntityAccessToken($accessToken, $lifetime))->getPayload($this->sslKey);
+	}
+	
 	public function getFromToken(RequestAccess $requestAccess, int $lifetime = self::LIFETIME): EntityAccessToken
 	{
 		// Check request access status
@@ -67,14 +72,5 @@ final class AccessToken
 		);
 		
 		return $accessToken;
-	}
-	
-	public function getUserInfos(string $accessToken, int $lifetime = self::LIFETIME): ?array
-	{
-		$payLoad = (new EntityAccessToken($accessToken, $lifetime))->getPayload($this->sslKey);
-		
-		if (!isset($payLoad[ EntityAccessToken::PAYLOAD_KEY_USER ])) return null;
-		
-		return (array)$payLoad[ EntityAccessToken::PAYLOAD_KEY_USER ];
 	}
 }
