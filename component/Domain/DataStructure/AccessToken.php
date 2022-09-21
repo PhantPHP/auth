@@ -31,16 +31,11 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 	public function __construct(string $value)
 	{
 		$this->value = $value;
-	public function getValue(): string
-	{
-		return $this->value;
-	}
-	
 	}
 	
 	public function __toString(): string
 	{
-		return $this->getValue();
+		return $this->value;
 	}
 	
 	public function check(SslKey $sslKey, Application $application): bool
