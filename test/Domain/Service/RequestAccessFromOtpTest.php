@@ -7,8 +7,8 @@ use Phant\Auth\Domain\DataStructure\{
 	AccessToken,
 	RequestAccessFromOtp,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
-	RequestAccessToken,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Token,
 };
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
 
@@ -28,7 +28,7 @@ use Phant\Error\NotCompliant;
 final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 {
 	protected ServiceRequestAccessFromOtp $service;
-	protected RequestAccessToken $fixture;
+	protected Token $fixture;
 	protected SimpleCache $cache;
 	
 	public function setUp(): void
@@ -44,7 +44,7 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 	public function testGenerate(): void
 	{
 		$this->assertIsObject($this->fixture);
-		$this->assertInstanceOf(RequestAccessToken::class, $this->fixture);
+		$this->assertInstanceOf(Token::class, $this->fixture);
 	}
 	
 	public function testGenerateInvalid(): void

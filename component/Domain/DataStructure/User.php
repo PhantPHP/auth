@@ -3,30 +3,30 @@ declare(strict_types=1);
 
 namespace Phant\Auth\Domain\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\Value\{
-	UserEmailAddress,
-	UserFirstname,
+use Phant\Auth\Domain\DataStructure\User\{
+	EmailAddress,
+	Firstname,
 	Lastname,
-	UserRole,
+	Role,
 };
 
 final class User extends \Phant\DataStructure\Abstract\Entity
 {
-	public ?UserEmailAddress $emailAddress;
+	public ?EmailAddress $emailAddress;
 	public ?Lastname $lastname;
-	public ?UserFirstname $firstname;
-	public ?UserRole $role;
+	public ?Firstname $firstname;
+	public ?Role $role;
 	
 	public function __construct(
-		null|string|UserEmailAddress $emailAddress,
+		null|string|EmailAddress $emailAddress,
 		null|string|Lastname $lastname,
-		null|string|UserFirstname $firstname,
-		null|UserRole $role = null
+		null|string|Firstname $firstname,
+		null|Role $role = null
 	)
 	{
-		if (is_string($emailAddress)) $emailAddress = new UserEmailAddress($emailAddress);
+		if (is_string($emailAddress)) $emailAddress = new EmailAddress($emailAddress);
 		if (is_string($lastname)) $lastname = new Lastname($lastname);
-		if (is_string($firstname)) $firstname = new UserFirstname($firstname);
+		if (is_string($firstname)) $firstname = new Firstname($firstname);
 		
 		$this->emailAddress = $emailAddress;
 		$this->lastname = $lastname;

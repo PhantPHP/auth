@@ -44,9 +44,9 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(true, $value);
 	}
 	
-	public function testGetFromRequestAccessToken(): void
+	public function testGetFromToken(): void
 	{
-		$entity = $this->service->getFromRequestAccessToken(
+		$entity = $this->service->getFromToken(
 			FixtureRequestAccessFromOtp::getVerified()
 		);
 		
@@ -54,11 +54,11 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(AccessToken::class, $entity);
 	}
 	
-	public function testGetFromRequestAccessTokenInvalid(): void
+	public function testGetFromTokenInvalid(): void
 	{
 		$this->expectException(NotAuthorized::class);
 		
-		$entity = $this->service->getFromRequestAccessToken(
+		$entity = $this->service->getFromToken(
 			FixtureRequestAccessFromOtp::get()
 		);
 	}

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Phant\Auth\Domain\DataStructure\Value;
+namespace Phant\Auth\Domain\DataStructure\RequestAccess;
 
-final class RequestAccessState extends \Phant\DataStructure\Abstract\Enum
+final class State extends \Phant\DataStructure\Abstract\Enum
 {
 	public const REQUESTED = 'requested';
 	public const REFUSED = 'refused';
@@ -22,21 +22,21 @@ final class RequestAccessState extends \Phant\DataStructure\Abstract\Enum
 		if (is_string($state)) $state = new self($state);
 		
 		switch ($state->getValue()) {
-			case RequestAccessState::REQUESTED :
+			case State::REQUESTED :
 				
 				break;
 				
-			case RequestAccessState::REFUSED :
+			case State::REFUSED :
 				
-				return ($this->value == RequestAccessState::REQUESTED);
+				return ($this->value == State::REQUESTED);
 				
-			case RequestAccessState::VERIFIED :
+			case State::VERIFIED :
 				
-				return ($this->value == RequestAccessState::REQUESTED);
+				return ($this->value == State::REQUESTED);
 				
-			case RequestAccessState::GRANTED :
+			case State::GRANTED :
 				
-				return ($this->value == RequestAccessState::VERIFIED);
+				return ($this->value == State::VERIFIED);
 				
 		}
 		

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Test\Domain\Service;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromOtp;
-use Phant\Auth\Domain\DataStructure\Value\RequestAccessToken;
+use Phant\Auth\Domain\DataStructure\RequestAccess\Token;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
 
 use Phant\Auth\Fixture\DataStructure\RequestAccessFromOtp as FixtureRequestAccessFromOtp;
@@ -55,7 +55,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		);
 		
 		$this->assertIsObject($value);
-		$this->assertInstanceOf(RequestAccessToken::class, $value);
+		$this->assertInstanceOf(Token::class, $value);
 	}
 	
 	public function testGetFromToken(): void

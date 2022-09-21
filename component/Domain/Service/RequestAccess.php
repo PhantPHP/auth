@@ -5,11 +5,13 @@ namespace Phant\Auth\Domain\Service;
 
 use Phant\Auth\Domain\Port\RequestAccess as PortRequestAccess;
 
-use Phant\Auth\Domain\DataStructure\RequestAccess as EntityRequestAccess;
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
-	RequestAccessToken,
+use Phant\Auth\Domain\DataStructure\{
+	RequestAccess as EntityRequestAccess,
 	SslKey,
+};
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
+	Token,
 };
 
 final class RequestAccess
@@ -31,21 +33,21 @@ final class RequestAccess
 		$this->repository->set($requestAccess);
 	}
 	
-	public function get(string|IdRequestAccess $id): EntityRequestAccess
+	public function get(string|Id $id): EntityRequestAccess
 	{
-		if (is_string($id)) $id = new IdRequestAccess($id);
+		if (is_string($id)) $id = new Id($id);
 		
 		return $this->repository->get($id);
 	}
 	
-	public function getToken(EntityRequestAccess $requestAccess): RequestAccessToken
+	public function getToken(EntityRequestAccess $requestAccess): Token
 	{
 		return $requestAccess->tokenizeId($this->sslKey);
 	}
 	
-	public function getFromToken(string|RequestAccessToken $token): EntityRequestAccess
+	public function getFromToken(string|Token $token): EntityRequestAccess
 	{
-		if (is_string($token)) $token = new IdRequestAccess($token);
+		if (is_string($token)) $token = new Id($token);
 		
 		$id = EntityRequestAccess::untokenizeId($token, $this->sslKey);
 		

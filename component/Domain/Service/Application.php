@@ -6,11 +6,11 @@ namespace Phant\Auth\Domain\Service;
 use Phant\Auth\Domain\Port\Application as PortApplication;
 
 use Phant\Auth\Domain\DataStructure\Application as EntityApplication;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\Application\{
 	ApiKey,
-	ApplicationName,
-	ApplicationId,
-	ApplicationLogo,
+	Name,
+	Id,
+	Logo,
 };
 
 final class Application
@@ -27,9 +27,9 @@ final class Application
 	public function add(string $name, ?string $logo = null): EntityApplication
 	{
 		$application = new EntityApplication(
-			ApplicationId::generate(),
-			new ApplicationName($name),
-			$logo ? new ApplicationLogo($logo) : null,
+			Id::generate(),
+			new Name($name),
+			$logo ? new Logo($logo) : null,
 			ApiKey::generate()
 		);
 		
@@ -43,9 +43,9 @@ final class Application
 		$this->repository->set($application);
 	}
 	
-	public function get(string|ApplicationId $id): EntityApplication
+	public function get(string|Id $id): EntityApplication
 	{
-		if (is_string($id)) $id = new ApplicationId($id);
+		if (is_string($id)) $id = new Id($id);
 		
 		return $this->repository->get($id);
 	}

@@ -14,10 +14,10 @@ use Phant\Auth\Domain\DataStructure\{
 	RequestAccessFromThirdParty as EntityRequestAccessFromThirdParty,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
-	RequestAccessState,
-	RequestAccessToken,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
+	State,
+	Token,
 };
 
 final class RequestAccessFromThirdParty
@@ -36,7 +36,7 @@ final class RequestAccessFromThirdParty
 		$this->serviceAccessToken = $serviceAccessToken;
 	}
 	
-	public function generate(Application $application, int $lifetime = self::LIFETIME): RequestAccessToken
+	public function generate(Application $application, int $lifetime = self::LIFETIME): Token
 	{
 		$requestAccess = $this->build($application, $lifetime);
 		
@@ -47,21 +47,21 @@ final class RequestAccessFromThirdParty
 		return $requestAccessToken;
 	}
 	
-	public function setStatus(RequestAccessToken $requestAccessToken, User $user, bool $isAuthorized): void
+	public function setStatus(Token $requestAccessToken, User $user, bool $isAuthorized): void
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		$requestAccess->setUser($user);
-		$requestAccess->setState(new RequestAccessState($isAuthorized ? RequestAccessState::VERIFIED : RequestAccessState::REFUSED));
+		$requestAccess->setState(new State($isAuthorized ? State::VERIFIED : State::REFUSED));
 		
 		$this->serviceRequestAccess->set($requestAccess);
 	}
 	
-	public function getAccessToken(RequestAccessToken $requestAccessToken): ?AccessToken
+	public function getAccessToken(Token $requestAccessToken): ?AccessToken
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
-		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
+		$accessToken = $this->serviceAccessToken->getFromToken($requestAccess);
 		
 		return $accessToken;
 	}

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\Port;
 
 use Phant\Auth\Domain\DataStructure\RequestAccess as EntityRequestAccess;
-use Phant\Auth\Domain\DataStructure\Value\IdRequestAccess;
+use Phant\Auth\Domain\DataStructure\RequestAccess\Id;
 
 use Psr\SimpleCache\CacheInterface;
 use Phant\Auth\Fixture\DataStructure\RequestAccessFromOtp as FixtureRequestAccessFromOtp;
@@ -25,7 +25,7 @@ final class RequestAccess implements \Phant\Auth\Domain\Port\RequestAccess
 		$this->cache->set((string)$requestAccess->getId(), $requestAccess);
 	}
 	
-	public function get(IdRequestAccess $id): EntityRequestAccess
+	public function get(Id $id): EntityRequestAccess
 	{
 		$entity = $this->cache->get((string)$id);
 		if ($entity) return $entity;

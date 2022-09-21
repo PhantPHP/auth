@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromThirdParty;
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
-	RequestAccessState,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
+	State,
 };
 
 use Phant\Auth\Fixture\DataStructure\{

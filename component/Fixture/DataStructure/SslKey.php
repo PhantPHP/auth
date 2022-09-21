@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Phant\Auth\Fixture\DataStructure\Value;
+namespace Phant\Auth\Fixture\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\Value\SslKey as ValueSslKey;
+use Phant\Auth\Domain\DataStructure\SslKey as ValueSslKey;
 
 final class SslKey
 {

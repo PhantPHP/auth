@@ -5,9 +5,9 @@ namespace Phant\Auth\Fixture\Port;
 
 use Phant\Auth\Domain\DataStructure\RequestAccess;
 use Psr\SimpleCache\CacheInterface;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	Otp,
-	RequestAccessToken,
+	Token,
 };
 
 final class UserNotification implements \Phant\Auth\Domain\Port\UserNotification
@@ -19,7 +19,7 @@ final class UserNotification implements \Phant\Auth\Domain\Port\UserNotification
 		$this->cache = $cache;
 	}
 	
-	public function sendOtpFromRequestAccess(RequestAccessToken $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void
+	public function sendOtpFromRequestAccess(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void
 	{
 		$this->cache->set((string)$requestAccessToken, $otp);
 	}

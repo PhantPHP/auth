@@ -5,13 +5,13 @@ namespace Phant\Auth\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\{
 	Application,
+	SslKey,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\AccessToken\{
 	Expire,
-	ApplicationId,
+	Id,
 	Jwt,
-	SslKey,
 };
 use Phant\Auth\Domain\Serialize\{
 	Application as SerializeApplication,
@@ -53,11 +53,11 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 			
 			$payload = (new Jwt($this->value))->decode($sslKey->getPublic());
 			
-			$ApplicationId = $payload[ self::PAYLOAD_KEY_APP ]->id ?? null;
+			$id = $payload[ self::PAYLOAD_KEY_APP ]->id ?? null;
 			
-			if (!$ApplicationId) return false;
+			if (!$id) return false;
 			
-			if (!$application->isHisId(new ApplicationId($ApplicationId))) return false;
+			if (!$application->isHisId($id)) return false;
 			
 		} catch (\Exception $e) {
 			return false;

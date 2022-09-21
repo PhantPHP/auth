@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\Domain\DataStructure\Value;
+namespace Test\Domain\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\Value\SslKey;
-use Phant\Auth\Fixture\DataStructure\Value\SslKey as FixtureSslKey;
+use Phant\Auth\Domain\DataStructure\SslKey;
+use Phant\Auth\Fixture\DataStructure\SslKey as FixtureSslKey;
 
 use Phant\Error\NotCompliant;
 

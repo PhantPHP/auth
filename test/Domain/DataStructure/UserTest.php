@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\User;
-use Phant\Auth\Domain\DataStructure\Value\{
-	UserEmailAddress,
-	UserFirstname,
+use Phant\Auth\Domain\DataStructure\User\{
+	EmailAddress,
+	Firstname,
 	Lastname,
-	UserRole,
+	Role,
 };
 
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;

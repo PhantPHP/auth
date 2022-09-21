@@ -15,11 +15,11 @@ use Phant\Auth\Domain\DataStructure\{
 	RequestAccessFromOtp as EntityRequestAccessFromOtp,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
 	Otp,
-	RequestAccessState,
-	RequestAccessToken,
+	State,
+	Token,
 };
 
 final class RequestAccessFromOtp
@@ -41,7 +41,7 @@ final class RequestAccessFromOtp
 		$this->userNotification = $userNotification;
 	}
 	
-	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3, int $lifetime = self::LIFETIME): RequestAccessToken
+	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3, int $lifetime = self::LIFETIME): Token
 	{
 		$requestAccess = $this->build($application, $user, $numberOfAttemptsLimit, $lifetime);
 		
@@ -54,7 +54,7 @@ final class RequestAccessFromOtp
 		return $requestAccessToken;
 	}
 	
-	public function verify(RequestAccessToken $requestAccessToken, string|Otp $otp): bool
+	public function verify(Token $requestAccessToken, string|Otp $otp): bool
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
@@ -62,30 +62,30 @@ final class RequestAccessFromOtp
 		
 		if ( ! $requestAccess->checkOtp($otp)) {
 			
-			$requestAccess->setState(new RequestAccessState(RequestAccessState::REFUSED));
+			$requestAccess->setState(new State(State::REFUSED));
 			
 			return false;
 		}
 		
-		$requestAccess->setState(new RequestAccessState(RequestAccessState::VERIFIED));
+		$requestAccess->setState(new State(State::VERIFIED));
 		
 		$this->serviceRequestAccess->set($requestAccess);
 		
 		return true;
 	}
 	
-	public function getNumberOfRemainingAttempts(RequestAccessToken $requestAccessToken): int
+	public function getNumberOfRemainingAttempts(Token $requestAccessToken): int
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		return $requestAccess->getNumberOfRemainingAttempts($requestAccess);
 	}
 	
-	public function getAccessToken(RequestAccessToken $requestAccessToken): ?AccessToken
+	public function getAccessToken(Token $requestAccessToken): ?AccessToken
 	{
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
-		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
+		$accessToken = $this->serviceAccessToken->getFromToken($requestAccess);
 		
 		return $accessToken;
 	}

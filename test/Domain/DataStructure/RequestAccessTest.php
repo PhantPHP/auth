@@ -8,21 +8,19 @@ use Phant\Auth\Domain\DataStructure\{
 	RequestAccessFromApiKey,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
-	IdRequestAccess,
+	Id,
 	Otp,
-	RequestAccessState,
-	RequestAccessToken,
+	State,
+	Token,
 };
 
 use Phant\Auth\Fixture\DataStructure\{
 	Application as FixtureApplication,
 	RequestAccessFromApiKey as FixtureRequestAccessFromApiKey,
-	User as FixtureUser,
-};
-use Phant\Auth\Fixture\DataStructure\Value\{
 	SslKey as FixtureSslKey,
+	User as FixtureUser,
 };
 
 use Phant\Error\NotAuthorized;
@@ -42,7 +40,7 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$value = $this->fixture->getId();
 		
 		$this->assertIsObject($value);
-		$this->assertInstanceOf(IdRequestAccess::class, $value);
+		$this->assertInstanceOf(Id::class, $value);
 	}
 	
 	public function testGetApplication(): void
@@ -110,12 +108,12 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$value = $this->fixture->getState();
 		
 		$this->assertIsObject($value);
-		$this->assertInstanceOf(RequestAccessState::class, $value);
+		$this->assertInstanceOf(State::class, $value);
 	}
 	
 	public function testCanBeSetStateTo(): void
 	{
-		$result = $this->fixture->canBeSetStateTo(new RequestAccessState(RequestAccessState::VERIFIED));
+		$result = $this->fixture->canBeSetStateTo(new State(State::VERIFIED));
 		
 		$this->assertIsBool($result);
 		$this->assertEquals(true, $result);
@@ -123,21 +121,21 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 	
 	public function testSetState(): void
 	{
-		$entity = $this->fixture->setState(new RequestAccessState(RequestAccessState::VERIFIED));
+		$entity = $this->fixture->setState(new State(State::VERIFIED));
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(RequestAccessFromApiKey::class, $entity);
 		
 		$this->assertIsObject($entity->getState());
-		$this->assertInstanceOf(RequestAccessState::class, $entity->getState());
-		$this->assertEquals(new RequestAccessState(RequestAccessState::VERIFIED), $entity->getState());
+		$this->assertInstanceOf(State::class, $entity->getState());
+		$this->assertEquals(new State(State::VERIFIED), $entity->getState());
 	}
 	
 	public function testSetStateInvalid(): void
 	{
 		$this->expectException(NotAuthorized::class);
 		
-		$entity = $this->fixture->setState(new RequestAccessState(RequestAccessState::REQUESTED));
+		$entity = $this->fixture->setState(new State(State::REQUESTED));
 	}
 	
 	public function testTokenizeIdAndUntokenizeId(): void
@@ -145,12 +143,12 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$result = $this->fixture->tokenizeId(FixtureSslKey::get());
 		
 		$this->assertIsObject($result);
-		$this->assertInstanceOf(RequestAccessToken::class, $result);
+		$this->assertInstanceOf(Token::class, $result);
 		
 		$entity = $this->fixture->untokenizeId($result, FixtureSslKey::get());
 		
 		$this->assertIsObject($entity);
-		$this->assertInstanceOf(IdRequestAccess::class, $entity);
+		$this->assertInstanceOf(Id::class, $entity);
 	}
 	
 	public function testTokenizeIdInvalid(): void

@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\User as EntityUser;
-use Phant\Auth\Domain\DataStructure\Value\{
-	UserEmailAddress,
-	UserFirstname,
+use Phant\Auth\Domain\DataStructure\User\{
+	EmailAddress,
+	Firstname,
 	Lastname,
-	UserRole,
+	Role,
 };
 
 final class User
@@ -16,9 +16,9 @@ final class User
 	public static function get(): EntityUser
 	{
 		return new EntityUser(
-			new UserEmailAddress('john.doe@domain.ext'),
+			new EmailAddress('john.doe@domain.ext'),
 			new Lastname('DOE'),
-			new UserFirstname('John'),
+			new Firstname('John'),
 			null
 		);
 	}

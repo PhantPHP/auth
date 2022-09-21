@@ -7,8 +7,8 @@ use Phant\Auth\Domain\DataStructure\{
 	AccessToken,
 	RequestAccessFromThirdParty,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
-	RequestAccessToken,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Token,
 };
 use Phant\Auth\Domain\Service\RequestAccessFromThirdParty as ServiceRequestAccessFromThirdParty;
 
@@ -26,7 +26,7 @@ use Phant\Error\NotAuthorized;
 final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 {
 	protected ServiceRequestAccessFromThirdParty $service;
-	protected RequestAccessToken $fixture;
+	protected Token $fixture;
 	
 	public function setUp(): void
 	{
@@ -39,7 +39,7 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	public function testGenerate(): void
 	{
 		$this->assertIsObject($this->fixture);
-		$this->assertInstanceOf(RequestAccessToken::class, $this->fixture);
+		$this->assertInstanceOf(Token::class, $this->fixture);
 	}
 	
 	public function testSetStatus(): void

@@ -5,15 +5,14 @@ namespace Phant\Auth\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\{
 	Application,
+	SslKey,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
-	IdRequestAccess,
-	Jwt,
-	RequestAccessState,
-	RequestAccessToken,
-	SslKey,
+	Id,
+	State,
+	Token,
 };
 
 use Phant\Error\NotAuthorized;
@@ -24,19 +23,19 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	const TOKEN_PAYLOAD_EXPIRATION = 'expiration';
 	const TOKEN_PAYLOAD_ID = 'request_access_id';
 	
-	protected IdRequestAccess $id;
+	protected Id $id;
 	protected ?Application $application;
 	protected ?User $user;
 	protected AuthMethod $authMethod;
-	protected RequestAccessState $state;
+	protected State $state;
 	protected int $expiration;
 	
 	public function __construct(
-		IdRequestAccess $id,
+		Id $id,
 		?Application $application,
 		?User $user,
 		AuthMethod $authMethod,
-		RequestAccessState $state,
+		State $state,
 		int $lifetime
 	)
 	{
@@ -48,7 +47,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		$this->expiration = time() + $lifetime;
 	}
 	
-	public function getId(): IdRequestAccess
+	public function getId(): Id
 	{
 		return $this->id;
 	}
@@ -86,12 +85,12 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this->authMethod;
 	}
 	
-	public function canBeSetStateTo(RequestAccessState $state): bool
+	public function canBeSetStateTo(State $state): bool
 	{
 		return $this->state->canBeSetTo($state);
 	}
 	
-	public function setState(RequestAccessState $state): self
+	public function setState(State $state): self
 	{
 		if (!$this->state->canBeSetTo($state)) {
 			throw new NotAuthorized('State can be set to set to : ' . $state);
@@ -102,12 +101,12 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this;
 	}
 	
-	public function getState(): RequestAccessState
+	public function getState(): State
 	{
 		return $this->state;
 	}
 	
-	public function tokenizeId(SslKey $sslKey): RequestAccessToken
+	public function tokenizeId(SslKey $sslKey): Token
 	{
 		$id = (string)$this->id;
 		
@@ -120,10 +119,10 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		
 		$token = strtr(base64_encode($token), '+/=', '._-');
 		
-		return new RequestAccessToken($token);
+		return new Token($token);
 	}
 	
-	public static function untokenizeId(RequestAccessToken $token, SslKey $sslKey): IdRequestAccess
+	public static function untokenizeId(Token $token, SslKey $sslKey): Id
 	{
 		$token = base64_decode(strtr((string)$token, '._-', '+/='));
 		
@@ -138,6 +137,6 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		
 		$id = $datas[ self::TOKEN_PAYLOAD_ID ];
 		
-		return new IdRequestAccess($id);
+		return new Id($id);
 	}
 }

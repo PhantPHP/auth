@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\Application as EntityApplication;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\Application\{
 	ApiKey,
-	ApplicationName,
-	CollectionApplication,
-	ApplicationId,
-	ApplicationLogo,
+	Collection,
+	Id,
+	Logo,
+	Name,
 };
 
 final class Application
@@ -42,9 +42,9 @@ final class Application
 		return self::buildFromDatas($datas);
 	}
 	
-	public static function getCollection(): CollectionApplication
+	public static function getCollection(): Collection
 	{
-		$collection = new CollectionApplication();
+		$collection = new Collection();
 		
 		foreach (self::DATAS as $datas) {
 			$collection->addApplication(
@@ -58,9 +58,9 @@ final class Application
 	private static function buildFromDatas(array $datas): EntityApplication
 	{
 		return new EntityApplication(
-			new ApplicationId($datas['id']),
-			new ApplicationName($datas['name']),
-			new ApplicationLogo($datas['logo']),
+			new Id($datas['id']),
+			new Name($datas['name']),
+			new Logo($datas['logo']),
 			new ApiKey($datas['api_key'])
 		);
 	}

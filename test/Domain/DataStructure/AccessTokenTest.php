@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\AccessToken;
-use Phant\Auth\Domain\DataStructure\Value\Expire;
+use Phant\Auth\Domain\DataStructure\AccessToken\Expire;
 
 use Phant\Auth\Fixture\DataStructure\{
 	AccessToken as FixtureAccessToken,
 	Application as FixtureApplication,
+	SslKey as FixtureSslKey,
 	User as FixtureUser,
 };
-use Phant\Auth\Fixture\DataStructure\Value\SslKey as FixtureSslKey;
 
 final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 {

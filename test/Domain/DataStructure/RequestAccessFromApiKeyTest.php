@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromApiKey;
-use Phant\Auth\Domain\DataStructure\Value\{
-	IdRequestAccess,
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
 	Otp,
-	RequestAccessState,
+	State,
 };
 
 use Phant\Auth\Fixture\DataStructure\{

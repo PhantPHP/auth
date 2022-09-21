@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\Domain\DataStructure\Value;
+namespace Test\Domain\DataStructure\RequestAccess;
 
-use Phant\Auth\Domain\DataStructure\Value\Otp;
+use Phant\Auth\Domain\DataStructure\RequestAccess\Otp;
 
 use Phant\Error\NotCompliant;
 

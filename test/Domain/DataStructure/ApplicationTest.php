@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\Application;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\Application\{
 	ApiKey,
-	ApplicationName,
-	ApplicationId,
-	ApplicationLogo,
+	Name,
+	Id,
+	Logo,
 };
 
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
@@ -25,9 +25,9 @@ final class ApplicationTest extends \PHPUnit\Framework\TestCase
 	public function testConstruct(): void
 	{
 		$entity = new Application(
-			ApplicationId::generate(),
-			new ApplicationName('Foo bar'),
-			new ApplicationLogo('https://domain.ext/file.ext'),
+			Id::generate(),
+			new Name('Foo bar'),
+			new Logo('https://domain.ext/file.ext'),
 			ApiKey::generate()
 		);
 		
@@ -68,7 +68,7 @@ final class ApplicationTest extends \PHPUnit\Framework\TestCase
 	public function testIsHisIdInvalid(): void
 	{
 		$result = $this->fixture->isHisId(
-			ApplicationId::generate()
+			Id::generate()
 		);
 		
 		$this->assertIsBool($result);

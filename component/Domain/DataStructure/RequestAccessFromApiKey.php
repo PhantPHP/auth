@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Phant\Auth\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\Application;
-use Phant\Auth\Domain\DataStructure\Value\{
-	ApiKey,
+use Phant\Auth\Domain\DataStructure\Application\ApiKey;
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
-	IdRequestAccess,
-	RequestAccessState,
+	Id,
+	State,
 };
 
 use Phant\Error\NotCompliant;
@@ -23,11 +23,11 @@ final class RequestAccessFromApiKey extends \Phant\Auth\Domain\DataStructure\Req
 	)
 	{
 		parent::__construct(
-			IdRequestAccess::generate(),
+			Id::generate(),
 			null,
 			null,
 			new AuthMethod(AuthMethod::API_KEY),
-			new RequestAccessState(RequestAccessState::REQUESTED),
+			new State(State::REQUESTED),
 			$lifetime
 		);
 		

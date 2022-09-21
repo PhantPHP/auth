@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace Test\Domain\DataStructure\Value;
 
-use Phant\Auth\Domain\DataStructure\Value\CollectionApplication;
+use Phant\Auth\Domain\DataStructure\Application\Collection;
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 
-final class CollectionApplicationTest extends \PHPUnit\Framework\TestCase
+final class CollectionTest extends \PHPUnit\Framework\TestCase
 {
-	protected CollectionApplication $fixture;
+	protected Collection $fixture;
 	
 	public function testAddApplication(): void
 	{
-		$collection = new CollectionApplication();
+		$collection = new Collection();
 		
 		$this->assertEquals(0, $collection->getNbItems());
 		

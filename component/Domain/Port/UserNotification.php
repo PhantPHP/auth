@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Phant\Auth\Domain\Port;
 
 use Phant\Auth\Domain\DataStructure\RequestAccess;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	Otp,
-	RequestAccessToken,
+	Token,
 };
 
 interface UserNotification
 {
-	public function sendOtpFromRequestAccess(RequestAccessToken $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void;
+	public function sendOtpFromRequestAccess(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void;
 }

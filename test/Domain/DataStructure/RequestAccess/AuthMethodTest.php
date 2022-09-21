@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\Domain\DataStructure\Value;
+namespace Test\Domain\DataStructure\RequestAccess;
 
-use Phant\Auth\Domain\DataStructure\Value\AuthMethod;
+use Phant\Auth\Domain\DataStructure\RequestAccess\AuthMethod;
 
 final class AuthMethodTest extends \PHPUnit\Framework\TestCase
 {

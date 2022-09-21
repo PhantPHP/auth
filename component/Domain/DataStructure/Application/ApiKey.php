@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Phant\Auth\Domain\DataStructure\Value;
+namespace Phant\Auth\Domain\DataStructure\Application;
 
 final class ApiKey extends \Phant\DataStructure\Abstract\Value\Varchar
 {

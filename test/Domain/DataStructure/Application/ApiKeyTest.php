@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Test\Domain\DataStructure\Value;
+namespace Test\Domain\DataStructure\Application;
 
-use Phant\Auth\Domain\DataStructure\Value\ApiKey;
+use Phant\Auth\Domain\DataStructure\Application\ApiKey;
 
 final class ApiKeyTest extends \PHPUnit\Framework\TestCase
 {

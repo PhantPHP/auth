@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace Phant\Auth\Domain\DataStructure\Value;
+namespace Phant\Auth\Domain\DataStructure\Application;
 
 use Phant\Auth\Domain\DataStructure\Application;
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\Application\{
 	ApiKey,
-	ApplicationId,
+	Id,
 };
 
-final class CollectionApplication extends \Phant\DataStructure\Abstract\Collection
+final class Collection extends \Phant\DataStructure\Abstract\Collection
 {
 	public function addApplication(Application $entity)
 	{
 		parent::addItem($entity);
 	}
 	
-	public function searchById(string|ApplicationId $id): ?Application
+	public function searchById(string|Id $id): ?Application
 	{
-		if (is_string($id)) $id = new ApplicationId($id);
+		if (is_string($id)) $id = new Id($id);
 		
 		foreach ($this->itemsIterator() as $entity) {
 			if ($entity->isHisId($id)) return $entity;

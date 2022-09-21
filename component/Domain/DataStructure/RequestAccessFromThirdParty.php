@@ -7,10 +7,10 @@ use Phant\Auth\Domain\DataStructure\{
 	Application,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
-	IdRequestAccess,
-	RequestAccessState,
+	Id,
+	State,
 };
 
 final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure\RequestAccess
@@ -21,11 +21,11 @@ final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure
 	)
 	{
 		parent::__construct(
-			IdRequestAccess::generate(),
+			Id::generate(),
 			$application,
 			null,
 			new AuthMethod(AuthMethod::THIRD_PARTY),
-			new RequestAccessState(RequestAccessState::REQUESTED),
+			new State(State::REQUESTED),
 			$lifetime
 		);
 	}

@@ -15,11 +15,11 @@ use Phant\Auth\Domain\DataStructure\{
 	RequestAccessFromApiKey as EntityRequestAccessFromApiKey,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
-	ApiKey,
-	IdRequestAccess,
-	RequestAccessState,
-	RequestAccessToken,
+use Phant\Auth\Domain\DataStructure\Application\ApiKey;
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	Id,
+	State,
+	Token,
 };
 
 final class RequestAccessFromApiKey
@@ -55,11 +55,11 @@ final class RequestAccessFromApiKey
 		
 		$requestAccess->setApplication($application);
 		
-		$requestAccess->setState(new RequestAccessState(RequestAccessState::VERIFIED));
+		$requestAccess->setState(new State(State::VERIFIED));
 		
 		$this->serviceRequestAccess->set($requestAccess);
 		
-		$accessToken = $this->serviceAccessToken->getFromRequestAccessToken($requestAccess);
+		$accessToken = $this->serviceAccessToken->getFromToken($requestAccess);
 		
 		return $accessToken;
 	}

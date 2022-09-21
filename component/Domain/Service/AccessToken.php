@@ -6,14 +6,12 @@ namespace Phant\Auth\Domain\Service;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
 
 use Phant\Auth\Domain\DataStructure\{
+	Application,
 	AccessToken as EntityAccessToken,
 	RequestAccess,
-};
-use Phant\Auth\Domain\DataStructure\Value\{
-	RequestAccessState,
 	SslKey,
 };
-use Phant\Auth\Domain\DataStructure\Application;
+use Phant\Auth\Domain\DataStructure\RequestAccess\State;
 
 use Phant\Error\NotAuthorized;
 
@@ -46,10 +44,10 @@ final class AccessToken
 		);
 	}
 	
-	public function getFromRequestAccessToken(RequestAccess $requestAccess, int $lifetime = self::LIFETIME): EntityAccessToken
+	public function getFromToken(RequestAccess $requestAccess, int $lifetime = self::LIFETIME): EntityAccessToken
 	{
 		// Check request access status
-		if (!$requestAccess->canBeSetStateTo(new RequestAccessState(RequestAccessState::GRANTED))) {
+		if (!$requestAccess->canBeSetStateTo(new State(State::GRANTED))) {
 			throw new NotAuthorized('The access request is invalid');
 		}
 		
@@ -64,7 +62,7 @@ final class AccessToken
 		// Change state
 		$this->serviceRequestAccess->set(
 			$requestAccess
-				->setState(new RequestAccessState(RequestAccessState::GRANTED))
+				->setState(new State(State::GRANTED))
 		);
 		
 		return $accessToken;

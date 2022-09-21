@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Phant\Auth\Domain\DataStructure\Value;
+namespace Phant\Auth\Domain\DataStructure;
 
 use Phant\Error\NotCompliant;
 
-final class SslKey extends \Phant\DataStructure\Abstract\Aggregate
+final class SslKey extends \Phant\DataStructure\Abstract\Entity
 {
 	private string $private;
 	private string $public;

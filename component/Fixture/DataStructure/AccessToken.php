@@ -7,9 +7,9 @@ use Phant\Auth\Domain\DataStructure\AccessToken as EntityAccessToken;
 
 use Phant\Auth\Fixture\DataStructure\{
 	Application as FixtureApplication,
+	SslKey as FixtureSslKey,
 	User as FixtureUser,
 };
-use Phant\Auth\Fixture\DataStructure\Value\SslKey as FixtureSslKey;
 
 final class AccessToken
 {

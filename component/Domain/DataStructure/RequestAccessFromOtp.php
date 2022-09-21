@@ -7,10 +7,10 @@ use Phant\Auth\Domain\DataStructure\{
 	Application,
 	User,
 };
-use Phant\Auth\Domain\DataStructure\Value\{
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
-	IdRequestAccess,
-	RequestAccessState,
+	Id,
+	State,
 	Otp,
 };
 
@@ -34,11 +34,11 @@ final class RequestAccessFromOtp extends \Phant\Auth\Domain\DataStructure\Reques
 		}
 		
 		parent::__construct(
-			IdRequestAccess::generate(),
+			Id::generate(),
 			$application,
 			$user,
 			new AuthMethod(AuthMethod::OTP),
-			new RequestAccessState(RequestAccessState::REQUESTED),
+			new State(State::REQUESTED),
 			$lifetime
 		);
 		
