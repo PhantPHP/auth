@@ -8,7 +8,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
 	CollectionApplication,
-	IdApplication,
+	ApplicationId,
 	Logo,
 };
 
@@ -58,7 +58,7 @@ final class Application
 	private static function buildFromDatas(array $datas): EntityApplication
 	{
 		return new EntityApplication(
-			new IdApplication($datas['id']),
+			new ApplicationId($datas['id']),
 			new ApplicationName($datas['name']),
 			new Logo($datas['logo']),
 			new ApiKey($datas['api_key'])

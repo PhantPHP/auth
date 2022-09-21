@@ -9,7 +9,7 @@ use Phant\Auth\Domain\DataStructure\Application as EntityApplication;
 use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
-	IdApplication,
+	ApplicationId,
 	Logo,
 };
 
@@ -27,7 +27,7 @@ final class Application
 	public function add(string $name, ?string $logo = null): EntityApplication
 	{
 		$application = new EntityApplication(
-			IdApplication::generate(),
+			ApplicationId::generate(),
 			new ApplicationName($name),
 			$logo ? new Logo($logo) : null,
 			ApiKey::generate()
@@ -43,9 +43,9 @@ final class Application
 		$this->repository->set($application);
 	}
 	
-	public function get(string|IdApplication $id): EntityApplication
+	public function get(string|ApplicationId $id): EntityApplication
 	{
-		if (is_string($id)) $id = new IdApplication($id);
+		if (is_string($id)) $id = new ApplicationId($id);
 		
 		return $this->repository->get($id);
 	}

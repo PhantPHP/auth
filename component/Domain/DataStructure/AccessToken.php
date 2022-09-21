@@ -9,7 +9,7 @@ use Phant\Auth\Domain\DataStructure\{
 };
 use Phant\Auth\Domain\DataStructure\Value\{
 	Expire,
-	IdApplication,
+	ApplicationId,
 	Jwt,
 	SslKey,
 };
@@ -53,11 +53,11 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 			
 			$payload = (new Jwt($this->value))->decode($sslKey->getPublic());
 			
-			$idApplication = $payload[ self::PAYLOAD_KEY_APP ]->id ?? null;
+			$ApplicationId = $payload[ self::PAYLOAD_KEY_APP ]->id ?? null;
 			
-			if (!$idApplication) return false;
+			if (!$ApplicationId) return false;
 			
-			if (!$application->isHisId(new IdApplication($idApplication))) return false;
+			if (!$application->isHisId(new ApplicationId($ApplicationId))) return false;
 			
 		} catch (\Exception $e) {
 			return false;

@@ -7,7 +7,7 @@ use Phant\Auth\Domain\DataStructure\Application;
 use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
-	IdApplication,
+	ApplicationId,
 	Logo,
 };
 
@@ -25,7 +25,7 @@ final class ApplicationTest extends \PHPUnit\Framework\TestCase
 	public function testConstruct(): void
 	{
 		$entity = new Application(
-			IdApplication::generate(),
+			ApplicationId::generate(),
 			new ApplicationName('Foo bar'),
 			new Logo('https://domain.ext/file.ext'),
 			ApiKey::generate()
@@ -68,7 +68,7 @@ final class ApplicationTest extends \PHPUnit\Framework\TestCase
 	public function testIsHisIdInvalid(): void
 	{
 		$result = $this->fixture->isHisId(
-			IdApplication::generate()
+			ApplicationId::generate()
 		);
 		
 		$this->assertIsBool($result);

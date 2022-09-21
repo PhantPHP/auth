@@ -7,7 +7,7 @@ use Phant\Auth\Domain\DataStructure\Application as EntityApplication;
 use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	CollectionApplication,
-	IdApplication,
+	ApplicationId,
 };
 
 use Psr\SimpleCache\CacheInterface;
@@ -29,7 +29,7 @@ final class Application implements \Phant\Auth\Domain\Port\Application
 		$this->cache->set((string)$application->id, $application);
 	}
 	
-	public function get(IdApplication $id): EntityApplication
+	public function get(ApplicationId $id): EntityApplication
 	{
 		$entity = $this->cache->get((string)$id);
 		if ($entity) return $entity;
