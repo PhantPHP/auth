@@ -5,7 +5,7 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\User;
 use Phant\Auth\Domain\DataStructure\Value\{
-	EmailAddress,
+	UserEmailAddress,
 	Firstname,
 	Lastname,
 	Role,
