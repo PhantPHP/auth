@@ -36,17 +36,17 @@ final class AccessToken
 		return $this->sslKey->getPublic();
 	}
 	
-	public function check(string $accessToken, Application $application, int $lifetime = self::LIFETIME): bool
+	public function check(string $accessToken, Application $application): bool
 	{
-		return (new EntityAccessToken($accessToken, $lifetime))->check(
+		return (new EntityAccessToken($accessToken))->check(
 			$this->sslKey, 
 			$application
 		);
 	}
 	
-	public function getPayload(string $accessToken, int $lifetime = self::LIFETIME): ?array
+	public function getPayload(string $accessToken): ?array
 	{
-		return (new EntityAccessToken($accessToken, $lifetime))->getPayload($this->sslKey);
+		return (new EntityAccessToken($accessToken))->getPayload($this->sslKey);
 	}
 	
 	public function getFromToken(RequestAccess $requestAccess, int $lifetime = self::LIFETIME): EntityAccessToken

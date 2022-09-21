@@ -25,18 +25,10 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 	
 	public function testConstruct(): void
 	{
-		$entity = new AccessToken($this->fixture->getValue(), 86400);
+		$entity = new AccessToken((string)$this->fixture);
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
-	}
-	
-	public function testGetExpire(): void
-	{
-		$value = $this->fixture->getExpire();
-		
-		$this->assertIsObject($value);
-		$this->assertInstanceOf(Expire::class, $value);
 	}
 	
 	public function testCheck(): void

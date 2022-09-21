@@ -27,22 +27,15 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 	public const PAYLOAD_KEY_USER = 'user';
 	
 	protected string $value;
-	protected Expire $expire;
 	
-	public function __construct(string $value, int $lifetime)
+	public function __construct(string $value)
 	{
 		$this->value = $value;
-		$this->expire = new Expire(date('Y-m-d', time() + $lifetime));
-	}
-	
 	public function getValue(): string
 	{
 		return $this->value;
 	}
 	
-	public function getExpire(): Expire
-	{
-		return $this->expire;
 	}
 	
 	public function __toString(): string
@@ -102,6 +95,6 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 			$payload[ self::PAYLOAD_KEY_USER ] = SerializeUser::serialize($user);
 		}
 		
-		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime), $lifetime);
+		return new self((string)Jwt::encode($sslKey->getPrivate(), $payload, $lifetime));
 	}
 }
