@@ -211,7 +211,10 @@ $application = new Application(
 	'https://domain.ext/image.ext'
 );
 
-$requestAccessToken = $serviceRequestAccessFromThirdParty->generate($application);
+$requestAccessToken = $serviceRequestAccessFromThirdParty->generate(
+	$application,
+	'https://domain.ext/callback/url'
+);
 
 
 // Request third party auth with requestAccessToken
