@@ -28,17 +28,17 @@ final class RequestAccessFromOtp
 	
 	protected ServiceRequestAccess $serviceRequestAccess;
 	protected ServiceAccessToken $serviceAccessToken;
-	protected OtpSender $OtpSender;
+	protected OtpSender $otpSender;
 	
 	public function __construct(
 		ServiceRequestAccess $serviceRequestAccess,
 		ServiceAccessToken $serviceAccessToken,
-		OtpSender $OtpSender
+		OtpSender $otpSender
 	)
 	{
 		$this->serviceRequestAccess = $serviceRequestAccess;
 		$this->serviceAccessToken = $serviceAccessToken;
-		$this->otpSender = $OtpSender;
+		$this->otpSender = $otpSender;
 	}
 	
 	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3, int $lifetime = self::LIFETIME): Token
