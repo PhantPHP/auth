@@ -8,7 +8,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	UserEmailAddress,
 	Firstname,
 	Lastname,
-	Role,
+	UserRole,
 };
 
 final class User

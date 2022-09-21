@@ -8,7 +8,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	UserEmailAddress,
 	Firstname,
 	Lastname,
-	Role,
+	UserRole,
 };
 
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;

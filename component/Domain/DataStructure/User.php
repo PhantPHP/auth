@@ -7,7 +7,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	UserEmailAddress,
 	Firstname,
 	Lastname,
-	Role,
+	UserRole,
 };
 
 final class User extends \Phant\DataStructure\Abstract\Entity
@@ -15,13 +15,13 @@ final class User extends \Phant\DataStructure\Abstract\Entity
 	public ?UserEmailAddress $emailAddress;
 	public ?Lastname $lastname;
 	public ?Firstname $firstname;
-	public ?Role $role;
+	public ?UserRole $role;
 	
 	public function __construct(
 		null|string|UserEmailAddress $emailAddress,
 		null|string|Lastname $lastname,
 		null|string|Firstname $firstname,
-		null|Role $role = null
+		null|UserRole $role = null
 	)
 	{
 		if (is_string($emailAddress)) $emailAddress = new UserEmailAddress($emailAddress);
