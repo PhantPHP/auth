@@ -83,7 +83,7 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 		$payload = [
 			self::PAYLOAD_KEY_EXPIRE => (string) $expire,
 			self::PAYLOAD_KEY_AUTH_METHOD => (string) $authMethod,
-			self::PAYLOAD_KEY_APP => SerializeApplication::serialize($application),
+			self::PAYLOAD_KEY_APP => SerializeApplication::serializeForPayload($application),
 		];
 		
 		if ($user) {
