@@ -54,8 +54,10 @@ final class RequestAccessFromOtp
 		return $requestAccessToken;
 	}
 	
-	public function verify(Token $requestAccessToken, string|Otp $otp): bool
+	public function verify(string|Token $requestAccessToken, string|Otp $otp): bool
 	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		if (is_string($otp)) $otp = new Otp($otp);
@@ -74,15 +76,19 @@ final class RequestAccessFromOtp
 		return true;
 	}
 	
-	public function getNumberOfRemainingAttempts(Token $requestAccessToken): int
+	public function getNumberOfRemainingAttempts(string|Token $requestAccessToken): int
 	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		return $requestAccess->getNumberOfRemainingAttempts($requestAccess);
 	}
 	
-	public function getAccessToken(Token $requestAccessToken): ?AccessToken
+	public function getAccessToken(string|Token $requestAccessToken): ?AccessToken
 	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		$accessToken = $this->serviceAccessToken->getFromToken($requestAccess);

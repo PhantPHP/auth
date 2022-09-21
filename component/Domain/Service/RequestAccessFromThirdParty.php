@@ -47,8 +47,10 @@ final class RequestAccessFromThirdParty
 		return $requestAccessToken;
 	}
 	
-	public function setStatus(Token $requestAccessToken, User $user, bool $isAuthorized): void
+	public function setStatus(string|Token $requestAccessToken, User $user, bool $isAuthorized): void
 	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		$requestAccess->setUser($user);
@@ -57,8 +59,10 @@ final class RequestAccessFromThirdParty
 		$this->serviceRequestAccess->set($requestAccess);
 	}
 	
-	public function getAccessToken(Token $requestAccessToken): ?AccessToken
+	public function getAccessToken(string|Token $requestAccessToken): ?AccessToken
 	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
 		$accessToken = $this->serviceAccessToken->getFromToken($requestAccess);
