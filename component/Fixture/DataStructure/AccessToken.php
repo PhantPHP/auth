@@ -10,6 +10,7 @@ use Phant\Auth\Fixture\DataStructure\{
 	SslKey as FixtureSslKey,
 	User as FixtureUser,
 };
+use Phant\Auth\Domain\DataStructure\RequestAccess\AuthMethod;
 
 final class AccessToken
 {
@@ -17,6 +18,7 @@ final class AccessToken
 	{
 		return EntityAccessToken::generate(
 			FixtureSslKey::get(),
+			new AuthMethod(AuthMethod::API_KEY),
 			FixtureApplication::get(),
 			FixtureUser::get(),
 			86400
@@ -27,6 +29,7 @@ final class AccessToken
 	{
 		return EntityAccessToken::generate(
 			FixtureSslKey::get(),
+			new AuthMethod(AuthMethod::API_KEY),
 			FixtureApplication::get(),
 			FixtureUser::get(),
 			-9999

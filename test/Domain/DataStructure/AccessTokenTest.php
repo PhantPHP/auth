@@ -12,6 +12,7 @@ use Phant\Auth\Fixture\DataStructure\{
 	SslKey as FixtureSslKey,
 	User as FixtureUser,
 };
+use Phant\Auth\Domain\DataStructure\RequestAccess\AuthMethod;
 
 final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 {
@@ -67,6 +68,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		);
 		
 		$this->assertIsArray($result);
+		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_AUTH_METHOD, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_APP, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_USER, $result);
 	}
@@ -84,6 +86,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 	{
 		$entity = AccessToken::generate(
 			FixtureSslKey::get(),
+			new AuthMethod(AuthMethod::API_KEY),
 			FixtureApplication::get(),
 			FixtureUser::get(),
 			86400
