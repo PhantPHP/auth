@@ -21,6 +21,7 @@ use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	State,
 	Token,
 };
+use Phant\Error\NotAuthorized;
 
 final class RequestAccessFromOtp
 {
@@ -60,11 +61,20 @@ final class RequestAccessFromOtp
 		
 		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
 		
+		if ( ! $requestAccess->canBeSetStateTo(new State(State::VERIFIED)) 
+		||	 ! $requestAccess->canBeSetStateTo(new State(State::REFUSED)) ) {
+			throw new NotAuthorized('The verification is not authorized');
+		}
+		
 		if (is_string($otp)) $otp = new Otp($otp);
 		
 		if ( ! $requestAccess->checkOtp($otp)) {
 			
-			$requestAccess->setState(new State(State::REFUSED));
+			if ( ! $requestAccess->getNumberOfRemainingAttempts()) {
+				$requestAccess->setState(new State(State::REFUSED));
+			}
+			
+			$this->serviceRequestAccess->set($requestAccess);
 			
 			return false;
 		}
