@@ -107,19 +107,19 @@ Process :
 8. The application requests an access token,
 9. The service provides an access token.
 
-The OTP is sent to user by your own UserNotification service (e-mail, SMS, etc.).
+The OTP is sent to user by your own OtpSender service (e-mail, SMS, etc.).
 
 ```php
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
 use Phant\Auth\Domain\DataStructure\Application;
 use Phant\Auth\Domain\DataStructure\User;
-use App\UserNotification;
+use App\OtpSender;
 
 
 // Config
 
 $repositoryApplication = new RepositoryApplication();
-$userNotification = new UserNotification();
+$OtpSender = new OtpSender();
 
 
 // Build services
@@ -127,7 +127,7 @@ $userNotification = new UserNotification();
 $serviceRequestAccessFromOtp = new ServiceRequestAccessFromOtp(
 	$serviceRequestAccess,
 	$serviceAccessToken,
-	$userNotification
+	$OtpSender
 );
 
 
@@ -192,7 +192,7 @@ use App\RepositoryRequestAccess;
 // Config
 
 $repositoryApplication = new RepositoryApplication();
-$userNotification = new UserNotification();
+$OtpSender = new OtpSender();
 
 
 // Build services

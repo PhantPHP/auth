@@ -8,7 +8,7 @@ use Phant\Auth\Domain\Service\{
 	RequestAccess as ServiceRequestAccess,
 };
 
-use Phant\Auth\Domain\Port\UserNotification;
+use Phant\Auth\Domain\Port\OtpSender;
 use Phant\Auth\Domain\DataStructure\{
 	AccessToken,
 	Application,
@@ -28,17 +28,17 @@ final class RequestAccessFromOtp
 	
 	protected ServiceRequestAccess $serviceRequestAccess;
 	protected ServiceAccessToken $serviceAccessToken;
-	protected UserNotification $userNotification;
+	protected OtpSender $OtpSender;
 	
 	public function __construct(
 		ServiceRequestAccess $serviceRequestAccess,
 		ServiceAccessToken $serviceAccessToken,
-		UserNotification $userNotification
+		OtpSender $OtpSender
 	)
 	{
 		$this->serviceRequestAccess = $serviceRequestAccess;
 		$this->serviceAccessToken = $serviceAccessToken;
-		$this->userNotification = $userNotification;
+		$this->otpSender = $OtpSender;
 	}
 	
 	public function generate(Application $application, User $user, int $numberOfAttemptsLimit = 3, int $lifetime = self::LIFETIME): Token
@@ -47,7 +47,7 @@ final class RequestAccessFromOtp
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
-		$this->userNotification->sendOtpFromRequestAccess($requestAccessToken, $requestAccess, $requestAccess->getOtp());
+		$this->otpSender->send($requestAccessToken, $requestAccess, $requestAccess->getOtp());
 		
 		$this->serviceRequestAccess->set($requestAccess);
 		

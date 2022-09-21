@@ -17,7 +17,7 @@ use Phant\Auth\Fixture\DataStructure\{
 	User as FixtureUser,
 	RequestAccessFromOtp as FixtureRequestAccessFromOtp,
 };
-use Phant\Auth\Fixture\Port\UserNotification as FixturePortUserNotification;
+use Phant\Auth\Fixture\Port\OtpSender as FixturePortOtpSender;
 use Phant\Auth\Fixture\Service\{
 	RequestAccessFromOtp as FixtureServiceRequestAccessFromOtp,
 };

@@ -9,7 +9,7 @@ use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	Token,
 };
 
-interface UserNotification
+interface OtpSender
 {
-	public function sendOtpFromRequestAccess(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void;
+	public function send(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void;
 }

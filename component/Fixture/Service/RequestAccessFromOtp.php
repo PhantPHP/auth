@@ -5,7 +5,7 @@ namespace Phant\Auth\Fixture\Service;
 
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
 
-use Phant\Auth\Fixture\Port\UserNotification as FixtureRepositoryUserNotification;
+use Phant\Auth\Fixture\Port\OtpSender as FixtureRepositoryOtpSender;
 use Phant\Auth\Fixture\Service\{
 	AccessToken as FixtureServiceAccessToken,
 	RequestAccess as FixtureServiceRequestAccess,
@@ -19,7 +19,7 @@ final class RequestAccessFromOtp
 		return new ServiceRequestAccessFromOtp(
 			(new FixtureServiceRequestAccess())(),
 			(new FixtureServiceAccessToken())(),
-			new FixtureRepositoryUserNotification(
+			new FixtureRepositoryOtpSender(
 				new SimpleCache(realpath(__DIR__ . '/../../../test/storage/'), 'user-notification')
 			)
 		);

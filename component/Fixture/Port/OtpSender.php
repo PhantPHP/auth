@@ -10,7 +10,7 @@ use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	Token,
 };
 
-final class UserNotification implements \Phant\Auth\Domain\Port\UserNotification
+final class OtpSender implements \Phant\Auth\Domain\Port\OtpSender
 {
 	protected CacheInterface $cache;
 	
@@ -19,7 +19,7 @@ final class UserNotification implements \Phant\Auth\Domain\Port\UserNotification
 		$this->cache = $cache;
 	}
 	
-	public function sendOtpFromRequestAccess(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void
+	public function send(Token $requestAccessToken, RequestAccess $requestAccess, Otp $otp): void
 	{
 		$this->cache->set((string)$requestAccessToken, $otp);
 	}
