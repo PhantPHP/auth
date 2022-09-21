@@ -13,6 +13,7 @@ use Phant\Auth\Domain\DataStructure\AccessToken\{
 	Id,
 	Jwt,
 };
+use Phant\Auth\Domain\DataStructure\RequestAccess\AuthMethod;
 use Phant\Auth\Domain\Serialize\{
 	Application as SerializeApplication,
 	User as SerializeUser,
@@ -20,6 +21,7 @@ use Phant\Auth\Domain\Serialize\{
 
 final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 {
+	public const PAYLOAD_KEY_AUTH_METHOD = 'auth_method';
 	public const PAYLOAD_KEY_APP = 'app';
 	public const PAYLOAD_KEY_USER = 'user';
 	
@@ -79,9 +81,16 @@ final class AccessToken extends \Phant\DataStructure\Abstract\Entity
 		}
 	}
 	
-	public static function generate(SslKey $sslKey, Application $application, ?User $user, int $lifetime): self
+	public static function generate(
+		SslKey $sslKey,
+		AuthMethod $authMethod,
+		Application $application,
+		?User $user,
+		int $lifetime
+	): self
 	{
 		$payload = [
+			self::PAYLOAD_KEY_AUTH_METHOD => (string) $authMethod,
 			self::PAYLOAD_KEY_APP => SerializeApplication::serialize($application),
 		];
 		

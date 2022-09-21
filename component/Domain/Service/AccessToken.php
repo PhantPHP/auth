@@ -54,6 +54,7 @@ final class AccessToken
 		// Generate new access token
 		$accessToken = EntityAccessToken::generate(
 			$this->sslKey,
+			$requestAccess->getAuthMethod(),
 			$requestAccess->getApplication(),
 			$requestAccess->getUser(),
 			$lifetime
