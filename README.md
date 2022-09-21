@@ -32,7 +32,7 @@ For each use case the following setup is required.
 ```php
 use Phant\Auth\Domain\Service\AccessToken as ServiceAccessToken;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
-use Phant\Auth\FixtDomainure\DataStructure\Value\SslKey;
+use Phant\Auth\FixtDomainure\DataStructure\SslKey;
 use App\RepositoryRequestAccess;
 
 
@@ -255,7 +255,7 @@ For each use case the following setup is required.
 ```php
 use Phant\Auth\Domain\Service\AccessToken as ServiceAccessToken;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
-use Phant\Auth\FixtDomainure\DataStructure\Value\SslKey;
+use Phant\Auth\FixtDomainure\DataStructure\SslKey;
 use App\RepositoryRequestAccess;
 
 
