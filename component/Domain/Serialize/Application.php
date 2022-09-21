@@ -16,4 +16,12 @@ final class Application
 			'api_key'	=> (string) $application->apiKey,
 		];
 	}
+	
+	public static function serializeForPayload(EntityApplication $application): array
+	{
+		return [
+			'id'	=> (string) $application->id,
+			'name'	=> (string) $application->name,
+		];
+	}
 }
