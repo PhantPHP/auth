@@ -9,7 +9,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	ApplicationName,
 	CollectionApplication,
 	ApplicationId,
-	Logo,
+	ApplicationLogo,
 };
 
 final class Application
@@ -60,7 +60,7 @@ final class Application
 		return new EntityApplication(
 			new ApplicationId($datas['id']),
 			new ApplicationName($datas['name']),
-			new Logo($datas['logo']),
+			new ApplicationLogo($datas['logo']),
 			new ApiKey($datas['api_key'])
 		);
 	}

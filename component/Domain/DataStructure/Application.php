@@ -7,26 +7,26 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
 	ApplicationId,
-	Logo,
+	ApplicationLogo,
 };
 
 final class Application extends \Phant\DataStructure\Abstract\Entity
 {
 	public ApplicationId $id;
 	public ApplicationName $name;
-	public ?Logo $logo;
+	public ?ApplicationLogo $logo;
 	public ApiKey $apiKey;
 	
 	public function __construct(
 		null|string|ApplicationId $id,
 		null|string|ApplicationName $name,
-		null|string|Logo $logo,
+		null|string|ApplicationLogo $logo,
 		string|ApiKey $apiKey
 	)
 	{
 		if (is_string($id)) $id = new ApplicationId($id);
 		if (is_string($name)) $name = new ApplicationName($name);
-		if (is_string($logo)) $logo = new Logo($logo);
+		if (is_string($logo)) $logo = new ApplicationLogo($logo);
 		
 		$this->id = $id;
 		$this->name = $name;

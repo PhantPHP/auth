@@ -10,7 +10,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
 	ApplicationId,
-	Logo,
+	ApplicationLogo,
 };
 
 final class Application
@@ -29,7 +29,7 @@ final class Application
 		$application = new EntityApplication(
 			ApplicationId::generate(),
 			new ApplicationName($name),
-			$logo ? new Logo($logo) : null,
+			$logo ? new ApplicationLogo($logo) : null,
 			ApiKey::generate()
 		);
 		

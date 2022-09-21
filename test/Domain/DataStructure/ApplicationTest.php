@@ -8,7 +8,7 @@ use Phant\Auth\Domain\DataStructure\Value\{
 	ApiKey,
 	ApplicationName,
 	ApplicationId,
-	Logo,
+	ApplicationLogo,
 };
 
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
@@ -27,7 +27,7 @@ final class ApplicationTest extends \PHPUnit\Framework\TestCase
 		$entity = new Application(
 			ApplicationId::generate(),
 			new ApplicationName('Foo bar'),
-			new Logo('https://domain.ext/file.ext'),
+			new ApplicationLogo('https://domain.ext/file.ext'),
 			ApiKey::generate()
 		);
 		
