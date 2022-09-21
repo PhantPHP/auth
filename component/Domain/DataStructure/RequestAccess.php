@@ -20,6 +20,7 @@ use Phant\Error\NotCompliant;
 
 abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 {
+	const TOKEN_PAYLOAD_LIFETIME = 'lifetime';
 	const TOKEN_PAYLOAD_EXPIRATION = 'expiration';
 	const TOKEN_PAYLOAD_ID = 'request_access_id';
 	
@@ -28,6 +29,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 	protected ?User $user;
 	protected AuthMethod $authMethod;
 	protected State $state;
+	protected int $lifetime;
 	protected int $expiration;
 	
 	public function __construct(
@@ -44,6 +46,7 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		$this->user = $user;
 		$this->authMethod = $authMethod;
 		$this->state = $state;
+		$this->lifetime = $lifetime;
 		$this->expiration = time() + $lifetime;
 	}
 	
@@ -106,11 +109,22 @@ abstract class RequestAccess extends \Phant\DataStructure\Abstract\Entity
 		return $this->state;
 	}
 	
+	public function getLifetime(): int
+	{
+		return $this->lifetime;
+	}
+	
+	public function getExpiration(): int
+	{
+		return $this->expiration;
+	}
+	
 	public function tokenizeId(SslKey $sslKey): Token
 	{
 		$id = (string)$this->id;
 		
 		$datas = json_encode([
+			self::TOKEN_PAYLOAD_LIFETIME => $this->lifetime,
 			self::TOKEN_PAYLOAD_EXPIRATION => $this->expiration,
 			self::TOKEN_PAYLOAD_ID => $id,
 		]);

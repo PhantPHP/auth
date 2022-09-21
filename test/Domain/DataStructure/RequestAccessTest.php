@@ -138,6 +138,20 @@ final class RequestAccessTest extends \PHPUnit\Framework\TestCase
 		$entity = $this->fixture->setState(new State(State::REQUESTED));
 	}
 	
+	public function testGetLifetime(): void
+	{
+		$value = $this->fixture->getLifetime();
+		
+		$this->assertIsInt($value);
+	}
+	
+	public function testGetExpiration(): void
+	{
+		$value = $this->fixture->getExpiration();
+		
+		$this->assertIsInt($value);
+	}
+	
 	public function testTokenizeIdAndUntokenizeId(): void
 	{
 		$result = $this->fixture->tokenizeId(FixtureSslKey::get());
