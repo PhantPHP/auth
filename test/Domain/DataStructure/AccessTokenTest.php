@@ -68,6 +68,7 @@ final class AccessTokenTest extends \PHPUnit\Framework\TestCase
 		);
 		
 		$this->assertIsArray($result);
+		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_EXPIRE, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_AUTH_METHOD, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_APP, $result);
 		$this->assertArrayHasKey(AccessToken::PAYLOAD_KEY_USER, $result);
