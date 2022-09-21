@@ -23,6 +23,25 @@ final class CollectionApplicationTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals(1, $collection->getNbItems());
 	}
 	
+	public function testSearchById(): void
+	{
+		$collection = FixtureApplication::getCollection();
+		
+		$result = $collection->searchById(
+			FixtureApplication::get()->id
+		);
+		
+		$this->assertIsObject($result);
+		
+		$collection = FixtureApplication::getCollection();
+		
+		$result = $collection->searchById(
+			'1b3f18e5-c12d-4063-bf27-d77c2558ea1a'
+		);
+		
+		$this->assertNull($result);
+	}
+	
 	public function testSearchByApiKey(): void
 	{
 		$collection = FixtureApplication::getCollection();
