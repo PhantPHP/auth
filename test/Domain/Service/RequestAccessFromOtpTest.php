@@ -23,6 +23,7 @@ use Phant\Auth\Fixture\Service\{
 };
 use Phant\Cache\SimpleCache;
 
+use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 
 final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
@@ -80,6 +81,48 @@ final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsBool($result);
 		$this->assertEquals(false, $result);
+		
+		$result = $this->service->getNumberOfRemainingAttempts(
+			$this->fixture
+		);
+		$this->assertEquals(2, $result);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			'000000'
+		);
+		$result = $this->service->getNumberOfRemainingAttempts(
+			$this->fixture
+		);
+		$this->assertEquals(1, $result);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			'000000'
+		);
+		$result = $this->service->getNumberOfRemainingAttempts(
+			$this->fixture
+		);
+		$this->assertEquals(0, $result);
+	}
+	
+	public function testVerifyNotAuthorized(): void
+	{
+		$this->expectException(NotAuthorized::class);
+		
+		$otp = $this->cache->get((string)$this->fixture);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			$otp
+		);
+		
+		$otp = $this->cache->get((string)$this->fixture);
+		
+		$result = $this->service->verify(
+			$this->fixture,
+			$otp
+		);
 	}
 	
 	public function testGetNumberOfRemainingAttempts(): void
