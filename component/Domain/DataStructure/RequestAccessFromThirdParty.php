@@ -9,14 +9,18 @@ use Phant\Auth\Domain\DataStructure\{
 };
 use Phant\Auth\Domain\DataStructure\RequestAccess\{
 	AuthMethod,
+	CallbackUrl,
 	Id,
 	State,
 };
 
 final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure\RequestAccess
 {
+	protected CallbackUrl $callbackUrl;
+	
 	public function __construct(
 		Application $application,
+		CallbackUrl $callbackUrl,
 		int $lifetime
 	)
 	{
@@ -28,5 +32,12 @@ final class RequestAccessFromThirdParty extends \Phant\Auth\Domain\DataStructure
 			new State(State::REQUESTED),
 			$lifetime
 		);
+		
+		$this->callbackUrl = $callbackUrl;
+	}
+	
+	public function getCallbackUrl(): CallbackUrl
+	{
+		return $this->callbackUrl;
 	}
 }

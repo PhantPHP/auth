@@ -8,6 +8,7 @@ use Phant\Auth\Domain\DataStructure\{
 	RequestAccessFromThirdParty,
 };
 use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	CallbackUrl,
 	Token,
 };
 use Phant\Auth\Domain\Service\RequestAccessFromThirdParty as ServiceRequestAccessFromThirdParty;
@@ -32,7 +33,8 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->service = (new FixtureServiceRequestAccessFromThirdParty())();
 		$this->fixture = $this->service->generate(
-			FixtureApplication::get()
+			FixtureApplication::get(),
+			'https://domain.ext/path'
 		);
 	}
 	
@@ -67,6 +69,16 @@ final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase
 		
 		$this->assertIsObject($entity);
 		$this->assertInstanceOf(AccessToken::class, $entity);
+	}
+	
+	public function testGetCallbackUrl(): void
+	{
+		$value = $this->service->getCallbackUrl(
+			$this->fixture
+		);
+		
+		$this->assertIsObject($value);
+		$this->assertInstanceOf(CallbackUrl::class, $value);
 	}
 	
 	public function testGetAccessTokenInvalid(): void

@@ -15,6 +15,7 @@ use Phant\Auth\Domain\DataStructure\{
 	User,
 };
 use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	CallbackUrl,
 	Id,
 	State,
 	Token,
@@ -36,9 +37,11 @@ final class RequestAccessFromThirdParty
 		$this->serviceAccessToken = $serviceAccessToken;
 	}
 	
-	public function generate(Application $application, int $lifetime = self::LIFETIME): Token
+	public function generate(Application $application, string|CallbackUrl $callbackUrl, int $lifetime = self::LIFETIME): Token
 	{
-		$requestAccess = $this->build($application, $lifetime);
+		if (is_string($callbackUrl)) $callbackUrl = new CallbackUrl($callbackUrl);
+		
+		$requestAccess = $this->build($application, $callbackUrl, $lifetime);
 		
 		$requestAccessToken = $this->serviceRequestAccess->getToken($requestAccess);
 		
@@ -59,6 +62,15 @@ final class RequestAccessFromThirdParty
 		$this->serviceRequestAccess->set($requestAccess);
 	}
 	
+	public function getCallbackUrl(string|Token $requestAccessToken): CallbackUrl
+	{
+		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
+		
+		$requestAccess = $this->serviceRequestAccess->getFromToken($requestAccessToken);
+		
+		return $requestAccess->getCallbackUrl();
+	}
+	
 	public function getAccessToken(string|Token $requestAccessToken): ?AccessToken
 	{
 		if (is_string($requestAccessToken)) $requestAccessToken = new Token($requestAccessToken);
@@ -70,10 +82,11 @@ final class RequestAccessFromThirdParty
 		return $accessToken;
 	}
 	
-	private function build(Application $application, int $lifetime): EntityRequestAccessFromThirdParty
+	private function build(Application $application, CallbackUrl 			$callbackUrl, int $lifetime): EntityRequestAccessFromThirdParty
 	{
 		return new EntityRequestAccessFromThirdParty(
 			$application,
+			$callbackUrl,
 			$lifetime
 		);
 	}

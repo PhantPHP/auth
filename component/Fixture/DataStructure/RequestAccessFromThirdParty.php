@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\DataStructure\RequestAccessFromThirdParty as EntityRequestAccessFromThirdParty;
-use Phant\Auth\Domain\DataStructure\RequestAccess\State;
+use Phant\Auth\Domain\DataStructure\RequestAccess\{
+	CallbackUrl,
+	State,
+};
 
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
@@ -17,6 +20,7 @@ final class RequestAccessFromThirdParty
 		
 		return new EntityRequestAccessFromThirdParty(
 			FixtureApplication::get(),
+			new CallbackUrl('https://domain.ext/path'),
 			$lifetime
 		);
 	}
