@@ -119,7 +119,7 @@ use App\OtpSender;
 // Config
 
 $repositoryApplication = new RepositoryApplication();
-$OtpSender = new OtpSender();
+$otpSender = new OtpSender();
 
 
 // Build services
@@ -127,7 +127,7 @@ $OtpSender = new OtpSender();
 $serviceRequestAccessFromOtp = new ServiceRequestAccessFromOtp(
 	$serviceRequestAccess,
 	$serviceAccessToken,
-	$OtpSender
+	$otpSender
 );
 
 
@@ -192,7 +192,7 @@ use App\RepositoryRequestAccess;
 // Config
 
 $repositoryApplication = new RepositoryApplication();
-$OtpSender = new OtpSender();
+$otpSender = new OtpSender();
 
 
 // Build services
@@ -299,7 +299,7 @@ use Phant\Error\NotCompliant;
 $publicKey = $serviceAccessToken->getPublicKey();
 
 try {
-	$payLoad = (new Jwt($accessToken))->decode(publicKey);
+	$payLoad = (new Jwt($accessToken))->decode($publicKey);
 } catch (NotCompliant $e) {
 	
 }
