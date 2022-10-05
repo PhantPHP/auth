@@ -25,6 +25,17 @@ final class AccessToken
 		);
 	}
 	
+	public static function getWithoutUser(): EntityAccessToken
+	{
+		return EntityAccessToken::generate(
+			FixtureSslKey::get(),
+			new AuthMethod(AuthMethod::API_KEY),
+			FixtureApplication::get(),
+			null,
+			86400
+		);
+	}
+	
 	public static function getExpired(): EntityAccessToken
 	{
 		return EntityAccessToken::generate(
