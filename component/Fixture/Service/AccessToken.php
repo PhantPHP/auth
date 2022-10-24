@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phant\Auth\Fixture\Service;
@@ -10,11 +11,11 @@ use Phant\Auth\Fixture\Service\RequestAccess as FixtureServiceRequestAccess;
 
 final class AccessToken
 {
-	public function __invoke(): ServiceAccessToken
-	{
-		return new ServiceAccessToken(
-			FixtureSslKey::get(),
-			(new FixtureServiceRequestAccess())()
-		);
-	}
+    public function __invoke(): ServiceAccessToken
+    {
+        return new ServiceAccessToken(
+            FixtureSslKey::get(),
+            (new FixtureServiceRequestAccess())()
+        );
+    }
 }

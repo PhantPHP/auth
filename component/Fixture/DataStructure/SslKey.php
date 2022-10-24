@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phant\Auth\Fixture\DataStructure;
 
-use Phant\Auth\Domain\DataStructure\SslKey as ValueSslKey;
+use Phant\Auth\Domain\Entity\SslKey as ValueSslKey;
 
 final class SslKey
 {
-	private const PRIVATE = <<<EOD
+    private const PRIVATE = <<<EOD
 -----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQDSuaKgYq3rUx+kfmH/SAoiji7p9xRqSs+9D/3XA9FX4KVq0LFo
 7H7CMbkbw/FXz7zvS+GaobF+P/U52oqC9s3ATagm7uewI6kGT64V6smtU2UqRP3f
@@ -25,7 +26,7 @@ tXqe6pq1w3XUZ61GuxlrIR+c/IMWtBPuqS4K4Po2/CSU
 -----END RSA PRIVATE KEY-----
 EOD;
 
-	private const PUBLIC = <<<EOD
+    private const PUBLIC = <<<EOD
 -----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSuaKgYq3rUx+kfmH/SAoiji7p
 9xRqSs+9D/3XA9FX4KVq0LFo7H7CMbkbw/FXz7zvS+GaobF+P/U52oqC9s3ATagm
@@ -34,7 +35,7 @@ dEMfkL84vMtl9UObUwIDAQAB
 -----END PUBLIC KEY-----
 EOD;
 
-	private const INVALID_PRIVATE = <<<EOD
+    private const INVALID_PRIVATE = <<<EOD
 -----BEGIN RSA PRIVATE KEY-----
 MIICWgIBAAKBgHhmJkqMdk57FRHT5Al5WdgisuHMkbH1PKl7l/jqxdAQyTqXGYJ0
 2U8IZhwDH0gNZ0fZVdiqyDsUMJz0S3WqcTtDJlsBxyKpAC3Qj24+uazDaIzo832W
@@ -52,7 +53,7 @@ gNHVwFqtj3IET23k7CpeI9GcmLfjQG05wUwoVl46
 -----END RSA PRIVATE KEY-----
 EOD;
 
-	private const INVALID_PUBLIC = <<<EOD
+    private const INVALID_PUBLIC = <<<EOD
 -----BEGIN PUBLIC KEY-----
 MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgHhmJkqMdk57FRHT5Al5WdgisuHM
 kbH1PKl7l/jqxdAQyTqXGYJ02U8IZhwDH0gNZ0fZVdiqyDsUMJz0S3WqcTtDJlsB
@@ -61,19 +62,19 @@ xyKpAC3Qj24+uazDaIzo832Wyg0wgopKwoKOsLcoKe1pV/LAQd6JinhFje8m2DBY
 -----END PUBLIC KEY-----
 EOD;
 
-	public static function get(): ValueSslKey
-	{
-		return new ValueSslKey(
-			self::PRIVATE,
-			self::PUBLIC
-		);
-	}
-	
-	public static function getInvalid(): ValueSslKey
-	{
-		return new ValueSslKey(
-			self::INVALID_PRIVATE,
-			self::INVALID_PUBLIC
-		);
-	}
+    public static function get(): ValueSslKey
+    {
+        return new ValueSslKey(
+            self::PRIVATE,
+            self::PUBLIC
+        );
+    }
+
+    public static function getInvalid(): ValueSslKey
+    {
+        return new ValueSslKey(
+            self::INVALID_PRIVATE,
+            self::INVALID_PUBLIC
+        );
+    }
 }

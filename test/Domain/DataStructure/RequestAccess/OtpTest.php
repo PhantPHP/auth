@@ -1,50 +1,51 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Test\Domain\DataStructure\RequestAccess;
 
-use Phant\Auth\Domain\DataStructure\RequestAccess\Otp;
+use Phant\Auth\Domain\Entity\RequestAccess\Otp;
 
 use Phant\Error\NotCompliant;
 
 final class OtpTest extends \PHPUnit\Framework\TestCase
 {
-	public function testConstruct(): void
-	{
-		$result = new Otp('123456');
-		
-		$this->assertIsObject($result);
-		$this->assertInstanceOf(Otp::class, $result);
-	}
-	
-	public function testConstructFail(): void
-	{
-		$this->expectException(NotCompliant::class);
-		
-		new Otp('I23456');
-	}
-	
-	public function testCheck(): void
-	{
-		$result = (new Otp('123456'))->check('123456');
-		
-		$this->assertIsBool($result);
-		$this->assertEquals(true, $result);
-	}
-	
-	public function testCheckDifferent(): void
-	{
-		$result = (new Otp('123456'))->check('I23456');
-		
-		$this->assertIsBool($result);
-		$this->assertEquals(false, $result);
-	}
-	
-	public function testGenerate(): void
-	{
-		$result = Otp::generate();
-		
-		$this->assertIsObject($result);
-		$this->assertInstanceOf(Otp::class, $result);
-	}
+    public function testConstruct(): void
+    {
+        $result = new Otp('123456');
+
+        $this->assertIsObject($result);
+        $this->assertInstanceOf(Otp::class, $result);
+    }
+
+    public function testConstructFail(): void
+    {
+        $this->expectException(NotCompliant::class);
+
+        new Otp('I23456');
+    }
+
+    public function testCheck(): void
+    {
+        $result = (new Otp('123456'))->check('123456');
+
+        $this->assertIsBool($result);
+        $this->assertEquals(true, $result);
+    }
+
+    public function testCheckDifferent(): void
+    {
+        $result = (new Otp('123456'))->check('I23456');
+
+        $this->assertIsBool($result);
+        $this->assertEquals(false, $result);
+    }
+
+    public function testGenerate(): void
+    {
+        $result = Otp::generate();
+
+        $this->assertIsObject($result);
+        $this->assertInstanceOf(Otp::class, $result);
+    }
 }

@@ -11,18 +11,20 @@
     ],
     "require": {
         "php": ">=8.1",
-        "phant/data-structure": "3.*"
+        "phant/data-structure": "4.*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
         "psr/simple-cache": "^3.0",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "phant/cache": "1.*"
     },
     "scripts": {
+        "lint": "vendor/bin/php-cs-fixer fix ./ --rules=@PSR12",
         "analyse": "vendor/bin/phpstan analyse component --memory-limit=4G",
         "test": "vendor/bin/phpunit test --testdox",
-        "code-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit test --coverage-html public/coverage/html"
+        "coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit test --coverage-html .coverage/html"
     },
     "autoload": {
         "psr-4": {

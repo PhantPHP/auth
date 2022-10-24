@@ -6,8 +6,9 @@ vendor/*
 .phpunit*
 test/storage/*
 !test/storage/.gitkeep
-public/coverage/*
+.coverage/*
 
 # Dev
 .DS_Store
 .nova/*
+.php-cs-fixer.cache
