@@ -32,7 +32,7 @@ For each use case the following setup is required.
 ```php
 use Phant\Auth\Domain\Service\AccessToken as ServiceAccessToken;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
-use Phant\Auth\Domain\DataStructure\SslKey;
+use Phant\Auth\Domain\Entity\SslKey;
 use App\RepositoryRequestAccess;
 
 
@@ -93,26 +93,26 @@ $accessToken = $serviceRequestAccessFromApiKey->getAccessToken($apiKey);
 ```
 
 
-### From OTP
+### From Otp
 
 Process :
 
 1. The application asks the user to authenticate himself by providing his contact details (last name, first name and e-mail address),
 2. The application generates an access request by providing its identity and the user's contact details (last name, first name and e-mail address),
-3. The service generates an OTP and requests its sending to the user,
-4. The user receives an OTP,
-5. The application retrieves the OTP from the user,
-6. The user transmits the received OTP to the application,
-7. The application verifies the OTP with the service,
+3. The service generates an Otp and requests its sending to the user,
+4. The user receives an Otp,
+5. The application retrieves the Otp from the user,
+6. The user transmits the received Otp to the application,
+7. The application verifies the Otp with the service,
 8. The application requests an access token,
 9. The service provides an access token.
 
-The OTP is sent to user by your own OtpSender service (e-mail, SMS, etc.).
+The Otp is sent to user by your own OtpSender service (e-mail, SMS, etc.).
 
 ```php
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
-use Phant\Auth\Domain\DataStructure\Application;
-use Phant\Auth\Domain\DataStructure\User;
+use Phant\Auth\Domain\Entity\Application;
+use Phant\Auth\Domain\Entity\User;
 use App\OtpSender;
 
 
@@ -148,13 +148,13 @@ $application = new Application(
 $requestAccessToken = $serviceRequestAccessFromOtp->generate($user, $application);
 
 
-// Obtain OTP from user
+// Obtain Otp from user
 
 /* @todo */
 $otp = '123456';
 
 
-// Verify OTP
+// Verify Otp
 
 $isValid = $serviceRequestAccessFromOtp->verify($otp);
 
@@ -184,8 +184,8 @@ Process :
 
 ```php
 use Phant\Auth\Domain\Service\RequestAccessFromThirdParty as ServiceRequestAccessFromThirdParty;
-use Phant\Auth\Domain\DataStructure\Application;
-use Phant\Auth\Domain\DataStructure\User;
+use Phant\Auth\Domain\Entity\Application;
+use Phant\Auth\Domain\Entity\User;
 use App\RepositoryRequestAccess;
 
 
@@ -311,7 +311,7 @@ try {
 The application can verify the integrity of the token with the service.
 
 ```php
-use Phant\Auth\Domain\DataStructure\Application;
+use Phant\Auth\Domain\Entity\Application;
 
 $application = new Application(
 	'eb7c9c44-32c2-4e88-8410-4ebafb18fdf7',
@@ -328,7 +328,7 @@ $isValid = $serviceAccessToken->check($accessToken, $application);
 The app can get the token payload from the service.
 
 ```php
-use Phant\Auth\Domain\DataStructure\Application;
+use Phant\Auth\Domain\Entity\Application;
 
 $application = new Application(
 	'eb7c9c44-32c2-4e88-8410-4ebafb18fdf7',

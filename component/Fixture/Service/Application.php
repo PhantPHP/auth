@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Phant\Auth\Fixture\Service;
@@ -10,12 +11,12 @@ use Phant\Auth\Fixture\Port\Application as FixtureRepositoryApplication;
 
 final class Application
 {
-	public function __invoke(): ServiceApplication
-	{
-		return new ServiceApplication(
-			new FixtureRepositoryApplication(
-				new SimpleCache(realpath(__DIR__ . '/../../../test/storage/'), 'application')
-			)
-		);
-	}
+    public function __invoke(): ServiceApplication
+    {
+        return new ServiceApplication(
+            new FixtureRepositoryApplication(
+                new SimpleCache(realpath(__DIR__ . '/../../../test/storage/'), 'application')
+            )
+        );
+    }
 }
