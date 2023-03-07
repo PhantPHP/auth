@@ -11,7 +11,7 @@ use Phant\Auth\Fixture\Service\{
     AccessToken as FixtureServiceAccessToken,
     RequestAccess as FixtureServiceRequestAccess,
 };
-use Phant\Cache\SimpleCache;
+use Phant\Cache\File as SimpleCache;
 
 final class RequestAccessFromOtp
 {

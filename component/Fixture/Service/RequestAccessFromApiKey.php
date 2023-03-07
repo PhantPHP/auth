@@ -6,7 +6,7 @@ namespace Phant\Auth\Fixture\Service;
 
 use Phant\Auth\Domain\Service\RequestAccessFromApiKey as ServiceRequestAccessFromApiKey;
 
-use Phant\Cache\SimpleCache;
+use Phant\Cache\File as SimpleCache;
 use Phant\Auth\Fixture\Service\{
     AccessToken as FixtureServiceAccessToken,
     RequestAccess as FixtureServiceRequestAccess,

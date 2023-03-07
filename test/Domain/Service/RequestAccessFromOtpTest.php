@@ -22,7 +22,7 @@ use Phant\Auth\Fixture\Port\OtpSender as FixturePortOtpSender;
 use Phant\Auth\Fixture\Service\{
     RequestAccessFromOtp as FixtureServiceRequestAccessFromOtp,
 };
-use Phant\Cache\SimpleCache;
+use Phant\Cache\File as SimpleCache;
 
 use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
