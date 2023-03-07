@@ -6,7 +6,7 @@ namespace Phant\Auth\Fixture\Service;
 
 use Phant\Auth\Domain\Service\Application as ServiceApplication;
 
-use Phant\Cache\SimpleCache;
+use Phant\Cache\File as SimpleCache;
 use Phant\Auth\Fixture\Port\Application as FixtureRepositoryApplication;
 
 final class Application
