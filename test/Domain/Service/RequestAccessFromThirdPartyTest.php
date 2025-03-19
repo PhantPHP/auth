@@ -13,7 +13,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Token,
 };
 use Phant\Auth\Domain\Service\RequestAccessFromThirdParty as ServiceRequestAccessFromThirdParty;
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     RequestAccessFromThirdParty as FixtureRequestAccessFromThirdParty,
@@ -22,7 +21,6 @@ use Phant\Auth\Fixture\DataStructure\{
 use Phant\Auth\Fixture\Service\{
     RequestAccessFromThirdParty as FixtureServiceRequestAccessFromThirdParty,
 };
-
 use Phant\Error\NotAuthorized;
 
 final class RequestAccessFromThirdPartyTest extends \PHPUnit\Framework\TestCase

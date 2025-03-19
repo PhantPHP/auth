@@ -10,7 +10,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Id,
     State,
 };
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     RequestAccessFromThirdParty as FixtureRequestAccessFromThirdParty,

@@ -14,7 +14,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     State,
     Otp,
 };
-
 use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 

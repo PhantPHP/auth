@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Test\Domain\DataStructure\Application;
 
 use Phant\Auth\Domain\Entity\Application\Name;
-
 use Phant\Error\NotCompliant;
 
 final class NameTest extends \PHPUnit\Framework\TestCase

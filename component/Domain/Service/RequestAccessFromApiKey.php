@@ -9,7 +9,6 @@ use Phant\Auth\Domain\Service\{
     RequestAccess as ServiceRequestAccess,
 };
 use Phant\Auth\Domain\Port\Application as PortApplication;
-
 use Phant\Auth\Domain\Entity\{
     AccessToken,
     Application,
@@ -22,7 +21,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     State,
     Token,
 };
-
 use Phant\Error\NotFound;
 
 final class RequestAccessFromApiKey

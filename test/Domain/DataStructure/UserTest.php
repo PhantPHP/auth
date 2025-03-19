@@ -11,7 +11,6 @@ use Phant\Auth\Domain\Entity\User\{
     Lastname,
     Role,
 };
-
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 
 final class UserTest extends \PHPUnit\Framework\TestCase

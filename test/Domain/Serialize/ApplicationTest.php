@@ -6,7 +6,6 @@ namespace Test\Domain\Serialize;
 
 use Phant\Auth\Domain\Entity\Application;
 use Phant\Auth\Domain\Serialize\Application as SerializeApplication;
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 
 final class ApplicationTest extends \PHPUnit\Framework\TestCase

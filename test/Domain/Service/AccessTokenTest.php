@@ -6,14 +6,12 @@ namespace Test\Domain\Service;
 
 use Phant\Auth\Domain\Entity\AccessToken;
 use Phant\Auth\Domain\Service\AccessToken as ServiceAccessToken;
-
 use Phant\Auth\Fixture\DataStructure\{
     AccessToken as FixtureAccessToken,
     Application as FixtureApplication,
     RequestAccessFromOtp as FixtureRequestAccessFromOtp,
 };
 use Phant\Auth\Fixture\Service\AccessToken as FixtureServiceAccessToken;
-
 use Phant\Error\NotAuthorized;
 
 final class AccessTokenTest extends \PHPUnit\Framework\TestCase

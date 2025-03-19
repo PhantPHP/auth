@@ -10,10 +10,8 @@ use Phant\Auth\Domain\Entity\Application\{
     Collection,
     Id,
 };
-
 use Psr\SimpleCache\CacheInterface;
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
-
 use Phant\Error\NotFound;
 
 final class Application implements \Phant\Auth\Domain\Port\Application
@@ -37,7 +35,7 @@ final class Application implements \Phant\Auth\Domain\Port\Application
             return $entity;
         }
 
-        foreach (FixtureApplication::getCollection()->itemsIterator() as $entity) {
+        foreach (FixtureApplication::getCollection()->iterate() as $entity) {
             if ((string)$entity->id != (string)$id) {
                 continue;
             }
@@ -50,7 +48,7 @@ final class Application implements \Phant\Auth\Domain\Port\Application
 
     public function getFromApiKey(ApiKey $apiKey): EntityApplication
     {
-        foreach (FixtureApplication::getCollection()->itemsIterator() as $entity) {
+        foreach (FixtureApplication::getCollection()->iterate() as $entity) {
             if ((string)$entity->apiKey != (string)$apiKey) {
                 continue;
             }

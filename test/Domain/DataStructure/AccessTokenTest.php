@@ -6,7 +6,6 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\Entity\AccessToken;
 use Phant\Auth\Domain\Entity\AccessToken\Expire;
-
 use Phant\Auth\Fixture\DataStructure\{
     AccessToken as FixtureAccessToken,
     Application as FixtureApplication,

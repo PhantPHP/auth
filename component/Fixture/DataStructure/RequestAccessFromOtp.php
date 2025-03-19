@@ -9,7 +9,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Otp,
     State,
 };
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 

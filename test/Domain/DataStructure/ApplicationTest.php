@@ -11,7 +11,6 @@ use Phant\Auth\Domain\Entity\Application\{
     Id,
     Logo,
 };
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 
 final class ApplicationTest extends \PHPUnit\Framework\TestCase

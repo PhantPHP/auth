@@ -6,7 +6,6 @@ namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\Entity\RequestAccessFromApiKey as EntityRequestAccessFromApiKey;
 use Phant\Auth\Domain\Entity\RequestAccess\State;
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 
 final class RequestAccessFromApiKey
