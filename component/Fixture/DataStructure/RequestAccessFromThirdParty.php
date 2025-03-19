@@ -9,7 +9,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     CallbackUrl,
     State,
 };
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 

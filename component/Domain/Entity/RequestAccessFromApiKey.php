@@ -11,7 +11,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Id,
     State,
 };
-
 use Phant\Error\NotCompliant;
 
 final class RequestAccessFromApiKey extends \Phant\Auth\Domain\Entity\RequestAccess

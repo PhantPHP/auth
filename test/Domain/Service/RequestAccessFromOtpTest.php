@@ -12,7 +12,6 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Token,
 };
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     User as FixtureUser,
@@ -23,7 +22,6 @@ use Phant\Auth\Fixture\Service\{
     RequestAccessFromOtp as FixtureServiceRequestAccessFromOtp,
 };
 use Phant\Cache\File as SimpleCache;
-
 use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 

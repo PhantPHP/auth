@@ -16,14 +16,12 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     State,
     Token,
 };
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     RequestAccessFromApiKey as FixtureRequestAccessFromApiKey,
     SslKey as FixtureSslKey,
     User as FixtureUser,
 };
-
 use Phant\Error\NotAuthorized;
 use Phant\Error\NotCompliant;
 

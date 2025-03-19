@@ -10,10 +10,8 @@ use Phant\Auth\Domain\Entity\Application\{
     Collection,
     Id,
 };
-
 use Psr\SimpleCache\CacheInterface;
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
-
 use Phant\Error\NotFound;
 
 final class Application implements \Phant\Auth\Domain\Port\Application

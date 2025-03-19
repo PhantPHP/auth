@@ -6,7 +6,6 @@ namespace Test\Domain\Service;
 
 use Phant\Auth\Domain\Entity\Application;
 use Phant\Auth\Domain\Service\Application as ServiceApplication;
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 use Phant\Auth\Fixture\Service\Application as FixtureServiceApplication;
 

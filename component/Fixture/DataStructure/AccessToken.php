@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\DataStructure;
 
 use Phant\Auth\Domain\Entity\AccessToken as EntityAccessToken;
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     SslKey as FixtureSslKey,

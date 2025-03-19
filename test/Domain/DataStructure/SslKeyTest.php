@@ -6,7 +6,6 @@ namespace Test\Domain\DataStructure;
 
 use Phant\Auth\Domain\Entity\SslKey;
 use Phant\Auth\Fixture\DataStructure\SslKey as FixtureSslKey;
-
 use Phant\Error\NotCompliant;
 
 final class SslKeyTest extends \PHPUnit\Framework\TestCase

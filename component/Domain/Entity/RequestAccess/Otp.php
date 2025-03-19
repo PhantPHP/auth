@@ -27,7 +27,7 @@ final class Otp extends \Phant\DataStructure\Abstract\Value\Varchar
 
         $characters = '0123456789';
         for ($i = 0; $i < self::LENGTH; $i++) {
-            $otp.= $characters[mt_rand(0, strlen($characters) - 1)];
+            $otp .= $characters[mt_rand(0, strlen($characters) - 1)];
         }
 
         return new self($otp);

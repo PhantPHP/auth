@@ -6,10 +6,8 @@ namespace Phant\Auth\Fixture\Port;
 
 use Phant\Auth\Domain\Entity\RequestAccess as EntityRequestAccess;
 use Phant\Auth\Domain\Entity\RequestAccess\Id;
-
 use Psr\SimpleCache\CacheInterface;
 use Phant\Auth\Fixture\DataStructure\RequestAccessFromOtp as FixtureRequestAccessFromOtp;
-
 use Phant\Error\NotFound;
 
 final class RequestAccess implements \Phant\Auth\Domain\Port\RequestAccess

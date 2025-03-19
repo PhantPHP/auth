@@ -7,7 +7,6 @@ namespace Test\Domain\Service;
 use Phant\Auth\Domain\Entity\RequestAccessFromOtp;
 use Phant\Auth\Domain\Entity\RequestAccess\Token;
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
-
 use Phant\Auth\Fixture\DataStructure\RequestAccessFromOtp as FixtureRequestAccessFromOtp;
 use Phant\Auth\Fixture\Service\RequestAccess as FixtureServiceRequestAccess;
 

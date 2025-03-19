@@ -6,7 +6,6 @@ namespace Test\Domain\Serialize;
 
 use Phant\Auth\Domain\Entity\User;
 use Phant\Auth\Domain\Serialize\User as SerializeUser;
-
 use Phant\Auth\Fixture\DataStructure\User as FixtureUser;
 
 final class UserTest extends \PHPUnit\Framework\TestCase

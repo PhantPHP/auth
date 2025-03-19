@@ -8,7 +8,6 @@ use Phant\Auth\Domain\Service\{
     AccessToken as ServiceAccessToken,
     RequestAccess as ServiceRequestAccess,
 };
-
 use Phant\Auth\Domain\Entity\{
     AccessToken,
     Application,

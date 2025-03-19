@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phant\Auth\Domain\Service;
 
 use Phant\Auth\Domain\Service\RequestAccess as ServiceRequestAccess;
-
 use Phant\Auth\Domain\Entity\{
     Application,
     AccessToken as EntityAccessToken,
@@ -13,7 +12,6 @@ use Phant\Auth\Domain\Entity\{
     SslKey,
 };
 use Phant\Auth\Domain\Entity\RequestAccess\State;
-
 use Phant\Error\NotAuthorized;
 
 final class AccessToken

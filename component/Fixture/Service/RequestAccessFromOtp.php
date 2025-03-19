@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phant\Auth\Fixture\Service;
 
 use Phant\Auth\Domain\Service\RequestAccessFromOtp as ServiceRequestAccessFromOtp;
-
 use Phant\Auth\Fixture\Port\OtpSender as FixtureRepositoryOtpSender;
 use Phant\Auth\Fixture\Service\{
     AccessToken as FixtureServiceAccessToken,

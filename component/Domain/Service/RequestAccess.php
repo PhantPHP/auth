@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phant\Auth\Domain\Service;
 
 use Phant\Auth\Domain\Port\RequestAccess as PortRequestAccess;
-
 use Phant\Auth\Domain\Entity\{
     RequestAccess as EntityRequestAccess,
     SslKey,

@@ -10,13 +10,11 @@ use Phant\Auth\Domain\Entity\RequestAccess\{
     Otp,
     State,
 };
-
 use Phant\Auth\Fixture\DataStructure\{
     Application as FixtureApplication,
     RequestAccessFromOtp as FixtureRequestAccessFromOtp,
     User as FixtureUser,
 };
-
 use Phant\Error\NotAuthorized;
 
 final class RequestAccessFromOtpTest extends \PHPUnit\Framework\TestCase

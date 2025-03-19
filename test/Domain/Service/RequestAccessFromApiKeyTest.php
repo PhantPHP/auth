@@ -7,10 +7,8 @@ namespace Test\Domain\Service;
 use Phant\Auth\Domain\Entity\AccessToken;
 use Phant\Auth\Domain\Entity\Application\ApiKey;
 use Phant\Auth\Domain\Service\RequestAccessFromApiKey as ServiceRequestAccessFromApiKey;
-
 use Phant\Auth\Fixture\DataStructure\Application as FixtureApplication;
 use Phant\Auth\Fixture\Service\RequestAccessFromApiKey as FixtureServiceRequestAccessFromApiKey;
-
 use Phant\Error\NotFound;
 
 final class RequestAccessFromApiKeyTest extends \PHPUnit\Framework\TestCase

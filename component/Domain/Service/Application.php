@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phant\Auth\Domain\Service;
 
 use Phant\Auth\Domain\Port\Application as PortApplication;
-
 use Phant\Auth\Domain\Entity\Application as EntityApplication;
 use Phant\Auth\Domain\Entity\Application\{
     ApiKey,
