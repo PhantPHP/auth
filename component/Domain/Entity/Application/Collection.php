@@ -23,7 +23,7 @@ final class Collection extends \Phant\DataStructure\Abstract\Collection
             $id = new Id($id);
         }
 
-        foreach ($this->itemsIterator() as $entity) {
+        foreach ($this->iterate() as $entity) {
             if ($entity->isHisId($id)) {
                 return $entity;
             }
@@ -38,7 +38,7 @@ final class Collection extends \Phant\DataStructure\Abstract\Collection
             $apiKey = new ApiKey($apiKey);
         }
 
-        foreach ($this->itemsIterator() as $entity) {
+        foreach ($this->iterate() as $entity) {
             if ($entity->isHisApiKey($apiKey)) {
                 return $entity;
             }
